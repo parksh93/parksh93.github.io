@@ -679,7 +679,21 @@
       font-weight: 400;
       color: var(--accent);
       white-space: nowrap;
+      margin-bottom: 12px;
+    }
+
+    .project-card__client {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
       margin-bottom: 24px;
+    }
+
+    .project-card__client svg {
+      flex-shrink: 0;
+      opacity: 0.6;
     }
 
     .project-card__right {}
@@ -1270,7 +1284,7 @@
         <div class="project-cover">
           <div class="project-cover__inner">
             <div class="project-cover__label">Projects</div>
-            <h2 class="project-cover__title">참여한 프로젝트</h2>
+            <h2 class="project-cover__title">수행 프로젝트</h2>
             <p class="project-cover__desc">
               기능 개발, 보안 구현, 인프라 구축까지
               다양한 역할로 참여한 프로젝트입니다.
@@ -1295,6 +1309,10 @@
                 업무 시스템의 기능 개발, 보안 기능 구현, 배포형 시스템 대응, 설계 산출물 작성 및 하자보수까지 수행한 연속 사업
               </p>
               <span class="project-card__period">2024 — 2025</span>
+              <div class="project-card__client">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                행정안전부 국가기록원
+              </div>
               <div class="project-card__tags">
                 <span class="tag">Java</span>
                 <span class="tag">GPKI</span>
@@ -1353,7 +1371,11 @@
               <p class="project-card__summary">
                 기존 시스템 분석과 100건 이상의 하자보수 대응, 신규 일정관리 기능 개발을 함께 수행한 프로젝트
               </p>
-              <span class="project-card__period">2024</span>
+              <span class="project-card__period">2025</span>
+              <div class="project-card__client">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                국립중앙과학관
+              </div>
               <div class="project-card__tags">
                 <span class="tag">Spring Boot</span>
                 <span class="tag">PostgreSQL</span>
@@ -1407,7 +1429,11 @@
               <p class="project-card__summary">
                 Kubernetes 기반 개발환경 구축, CI/CD 파이프라인 구성, 모니터링 체계 수립까지 수행한 인프라 구축 프로젝트
               </p>
-              <span class="project-card__period">2024</span>
+              <span class="project-card__period">2026</span>
+              <div class="project-card__client">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                대구미래교육연구원
+              </div>
               <div class="project-card__tags">
                 <span class="tag">Kubernetes</span>
                 <span class="tag">Docker</span>
