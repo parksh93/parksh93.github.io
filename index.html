@@ -1055,6 +1055,121 @@
     .fade-up-delay-3 { transition-delay: 0.3s; }
     .fade-up-delay-4 { transition-delay: 0.4s; }
 
+    /* ===== Loading Screen ===== */
+    .loader {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: #0b080c;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .loader.done .loader__pill {
+      transform: scale(80);
+      background: #0b080c;
+      border-color: transparent;
+    }
+
+    .loader.done .loader__pill .loader__text {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .loader.done {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.6s cubic-bezier(0.25, 0.1, 0.25, 1) 1.2s;
+    }
+
+    .loader__pill {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      padding: 20px 48px;
+      background: rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 100px;
+      overflow: hidden;
+      transition: transform 1.4s cubic-bezier(0.76, 0, 0.24, 1),
+                  background 0.6s ease 0.4s,
+                  border-color 0.3s ease 0.2s;
+    }
+
+    /* 컨텐츠 등장 애니메이션 */
+    .loader-reveal .hero__inner,
+    .loader-reveal .nav {
+      animation: contentReveal 1s cubic-bezier(0.25, 0.1, 0.25, 1) forwards;
+    }
+
+    @keyframes contentReveal {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .loader__watermark {
+      position: absolute;
+      font-family: 'Geist', sans-serif;
+      font-weight: 900;
+      font-size: clamp(80px, 15vw, 200px);
+      color: rgba(255, 255, 255, 0.03);
+      white-space: nowrap;
+      letter-spacing: -4px;
+      user-select: none;
+    }
+    .loader__watermark--top { top: 15%; left: 5%; }
+    .loader__watermark--bottom { bottom: 15%; right: 5%; }
+
+    .loader__pill-progress {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent), #8b5cf6);
+      opacity: 0.15;
+      border-radius: 100px;
+      transition: width 0.1s linear;
+    }
+
+    .loader__text {
+      font-family: 'Geist', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      letter-spacing: 6px;
+      color: var(--text-primary);
+      position: relative;
+      z-index: 1;
+    }
+
+    .loader__percent {
+      font-family: 'Geist', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--text-primary);
+      min-width: 52px;
+      text-align: right;
+      position: relative;
+      z-index: 1;
+    }
+
+    .loader__percent::after {
+      content: '';
+      display: inline-block;
+      width: 10px; height: 18px;
+      background: var(--text-primary);
+      margin-left: 4px;
+      vertical-align: middle;
+      animation: blink-caret 0.8s step-end infinite;
+    }
+
     /* ===== Responsive ===== */
     @media (max-width: 768px) {
       .nav__links { display: none; }
@@ -1142,6 +1257,16 @@
   </style>
 </head>
 <body>
+
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader__watermark loader__watermark--bottom">FULL-STACK DEVELOPER</div>
+    <div class="loader__pill">
+      <div class="loader__pill-progress" id="loaderProgress"></div>
+      <span class="loader__text">LOADING</span>
+      <span class="loader__percent" id="loaderPercent">0%</span>
+    </div>
+  </div>
 
   <!-- Cursor Orb -->
   <div class="cursor-orb" id="cursorOrb"></div>
@@ -1568,6 +1693,58 @@
   </footer>
 
   <script>
+    // ===== Loading Screen =====
+    // 새로고침 시 스크롤 최상단으로
+    window.scrollTo(0, 0);
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+
+    (function() {
+      const loader = document.getElementById('loader');
+      const percentEl = document.getElementById('loaderPercent');
+      const progressEl = document.getElementById('loaderProgress');
+      const textEl = document.querySelector('.loader__text');
+      let current = 0;
+      const duration = 2500;
+      const start = performance.now();
+
+      document.body.style.overflow = 'hidden';
+
+      function tick(now) {
+        const elapsed = now - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = progress < 0.5
+          ? 2 * progress * progress
+          : 1 - Math.pow(-2 * progress + 2, 2) / 2;
+        current = Math.round(eased * 100);
+
+        percentEl.textContent = current + '%';
+        progressEl.style.width = current + '%';
+
+        if (progress < 1) {
+          requestAnimationFrame(tick);
+        } else {
+          // 100% → "WELCOME" 텍스트로 변경
+          textEl.textContent = 'WELCOME';
+          percentEl.style.display = 'none';
+
+          // 로딩 바 확대 → 검은색으로 화면 전체 덮기
+          setTimeout(() => {
+            loader.classList.add('done');
+          }, 600);
+
+          // 확대 완료 후 컨텐츠 부드럽게 등장
+          setTimeout(() => {
+            document.body.style.overflow = '';
+            document.body.classList.add('loader-reveal');
+          }, 1800);
+
+          // DOM 제거
+          setTimeout(() => loader.remove(), 2400);
+        }
+      }
+      requestAnimationFrame(tick);
+    })();
+
     // ===== Typing Animation =====
     (function() {
       const phrases = ['Full-Stack Developer', 'Backend Engineer', 'DevOps Enthusiast'];
