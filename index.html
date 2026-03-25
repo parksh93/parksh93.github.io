@@ -150,7 +150,7 @@
       align-items: center;
       padding: 120px 32px 80px;
       position: relative;
-      overflow: hidden;
+      overflow: visible;
     }
 
     .hero::before {
@@ -661,6 +661,13 @@
       margin-bottom: 20px;
     }
 
+    .project-card__meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+    }
+
     .project-card__period {
       display: inline-block;
       padding: 6px 16px;
@@ -671,7 +678,6 @@
       font-weight: 400;
       color: var(--accent);
       white-space: nowrap;
-      margin-bottom: 12px;
     }
 
     .project-card__client {
@@ -680,7 +686,6 @@
       gap: 6px;
       font-size: 13px;
       color: var(--text-muted);
-      margin-bottom: 24px;
     }
 
     .project-card__client svg {
@@ -915,11 +920,17 @@
       transform: translateY(-2px);
     }
 
+    .maint-card__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
     .maint-card__title {
       font-size: 18px;
       font-weight: 500;
       color: var(--text-primary);
-      margin-bottom: 12px;
     }
 
     .maint-card__desc {
@@ -927,6 +938,19 @@
       color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 16px;
+    }
+
+    .maint-card__client {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    .maint-card__client svg {
+      flex-shrink: 0;
+      opacity: 0.6;
     }
 
     .maint-card__tags {
@@ -1425,10 +1449,12 @@
               <p class="project-card__summary">
                 업무 시스템의 기능 개발, 보안 기능 구현, 배포형 시스템 대응, 설계 산출물 작성 및 하자보수까지 수행한 연속 사업
               </p>
-              <span class="project-card__period">2024 — 2025</span>
-              <div class="project-card__client">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                행정안전부 국가기록원
+              <div class="project-card__meta">
+                <span class="project-card__period">2024 — 2025</span>
+                <div class="project-card__client">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  행정안전부 국가기록원
+                </div>
               </div>
               <div class="project-card__tags">
                 <span class="tag">Java</span>
@@ -1488,10 +1514,12 @@
               <p class="project-card__summary">
                 기존 시스템 분석과 100건 이상의 하자보수 대응, 신규 일정관리 기능 개발을 함께 수행한 프로젝트
               </p>
-              <span class="project-card__period">2025</span>
-              <div class="project-card__client">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                국립중앙과학관
+              <div class="project-card__meta">
+                <span class="project-card__period">2025</span>
+                <div class="project-card__client">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  국립중앙과학관
+                </div>
               </div>
               <div class="project-card__tags">
                 <span class="tag">Spring Boot</span>
@@ -1546,10 +1574,12 @@
               <p class="project-card__summary">
                 Kubernetes 기반 개발환경 구축, CI/CD 파이프라인 구성, 모니터링 체계 수립까지 수행한 인프라 구축 프로젝트
               </p>
-              <span class="project-card__period">2026</span>
-              <div class="project-card__client">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-                대구미래교육연구원
+              <div class="project-card__meta">
+                <span class="project-card__period">2026</span>
+                <div class="project-card__client">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                  대구미래교육연구원
+                </div>
               </div>
               <div class="project-card__tags">
                 <span class="tag">Kubernetes</span>
@@ -1632,7 +1662,13 @@
 
       <div class="maint-grid">
         <div class="maint-card fade-up">
-          <h3 class="maint-card__title">RFID 시스템 유지보수</h3>
+          <div class="maint-card__header">
+            <h3 class="maint-card__title">RFID 시스템 유지보수</h3>
+            <div class="maint-card__client">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              부여군청
+            </div>
+          </div>
           <p class="maint-card__desc">
             RFID 기반 업무 시스템의 운영 안정성을 확보하고,
             장애 발생 시 원인 분석 및 신속한 대응을 수행했습니다.
@@ -1645,7 +1681,13 @@
         </div>
 
         <div class="maint-card fade-up fade-up-delay-1">
-          <h3 class="maint-card__title">Proxy 서버 유지보수</h3>
+          <div class="maint-card__header">
+            <h3 class="maint-card__title">Proxy 서버 유지보수</h3>
+            <div class="maint-card__client">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              과학기술정책연구원
+            </div>
+          </div>
           <p class="maint-card__desc">
             Proxy 시스템 운영 상태를 모니터링하고,
             요청사항에 대한 대응 및 시스템 개선 작업을 수행했습니다.
@@ -1773,72 +1815,28 @@
       const codeBox = document.querySelector('.hero__code-box');
       if (!codeBox) return;
 
-      const maxTilt = 35;      // 최대 기울기 (도)
-      const maxShift = 18;     // 최대 이동 (px)
-      const maxScale = 1.06;   // 호버 시 확대
-      let isHovering = false;
-      let currentRotateX = 0, currentRotateY = 0;
-      let currentShiftX = 0, currentShiftY = 0;
-      let currentScale = 1;
-      let targetRotateX = 0, targetRotateY = 0;
-      let targetShiftX = 0, targetShiftY = 0;
-      let targetScale = 1;
-      let rafId = null;
+      const maxTilt = 25;
+      const maxShift = 12;
 
-      function lerp(a, b, t) { return a + (b - a) * t; }
-
-      function animate() {
-        const speed = isHovering ? 0.12 : 0.06;
-        currentRotateX = lerp(currentRotateX, targetRotateX, speed);
-        currentRotateY = lerp(currentRotateY, targetRotateY, speed);
-        currentShiftX = lerp(currentShiftX, targetShiftX, speed);
-        currentShiftY = lerp(currentShiftY, targetShiftY, speed);
-        currentScale = lerp(currentScale, targetScale, speed);
-
-        codeBox.style.transform =
-          `perspective(600px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) translate(${currentShiftX}px, ${currentShiftY}px) scale(${currentScale})`;
-
-        // 거의 정지 상태면 멈춤
-        if (!isHovering &&
-            Math.abs(currentRotateX) < 0.01 && Math.abs(currentRotateY) < 0.01 &&
-            Math.abs(currentShiftX) < 0.01 && Math.abs(currentShiftY) < 0.01 &&
-            Math.abs(currentScale - 1) < 0.001) {
-          codeBox.style.transform = '';
-          rafId = null;
-          return;
-        }
-        rafId = requestAnimationFrame(animate);
-      }
-
-      function startAnim() {
-        if (!rafId) rafId = requestAnimationFrame(animate);
-      }
-
-      codeBox.addEventListener('mouseenter', () => {
-        isHovering = true;
-        targetScale = maxScale;
-        startAnim();
-      });
-
+      // 마우스 움직임에 즉각 반응
       codeBox.addEventListener('mousemove', (e) => {
         const rect = codeBox.getBoundingClientRect();
-        const x = (e.clientX - rect.left) / rect.width;   // 0~1
-        const y = (e.clientY - rect.top) / rect.height;    // 0~1
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
 
-        targetRotateY = (x - 0.5) * maxTilt;
-        targetRotateX = (0.5 - y) * maxTilt;
-        targetShiftX = (x - 0.5) * maxShift;
-        targetShiftY = (y - 0.5) * maxShift;
+        const rotateY = (x - 0.5) * maxTilt;
+        const rotateX = (0.5 - y) * maxTilt;
+        const shiftX = (x - 0.5) * maxShift;
+        const shiftY = (y - 0.5) * maxShift;
+
+        codeBox.style.transition = 'none';
+        codeBox.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translate(${shiftX}px, ${shiftY}px) scale(1.04)`;
       });
 
+      // 마우스 나가면 부드럽게 원위치
       codeBox.addEventListener('mouseleave', () => {
-        isHovering = false;
-        targetRotateX = 0;
-        targetRotateY = 0;
-        targetShiftX = 0;
-        targetShiftY = 0;
-        targetScale = 1;
-        startAnim();
+        codeBox.style.transition = 'transform 0.5s cubic-bezier(.25,.1,.25,1)';
+        codeBox.style.transform = '';
       });
     })();
 
