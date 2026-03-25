@@ -238,22 +238,14 @@
       pointer-events: auto;
       user-select: none;
       cursor: default;
-      transition: border-color 0.4s ease, box-shadow 0.4s ease, transform 0.4s ease;
+      transition: border-color 0.4s ease, box-shadow 0.4s ease;
       transform-style: preserve-3d;
+      will-change: transform;
     }
 
     .hero__code-box:hover {
       border-color: rgba(194, 164, 255, 0.35);
       box-shadow: 0 24px 70px rgba(194, 164, 255, 0.12), 0 0 40px rgba(194, 164, 255, 0.06);
-      animation: codeBoxTilt 4s ease-in-out infinite;
-    }
-
-    @keyframes codeBoxTilt {
-      0%   { transform: rotateX(0deg) rotateY(0deg); }
-      25%  { transform: rotateX(-2deg) rotateY(3deg); }
-      50%  { transform: rotateX(1.5deg) rotateY(-2deg); }
-      75%  { transform: rotateX(-1deg) rotateY(2.5deg); }
-      100% { transform: rotateX(0deg) rotateY(0deg); }
     }
 
     .hero__code-titlebar {
@@ -1774,6 +1766,80 @@
         }
       }
       setTimeout(type, 1200);
+    })();
+
+    // ===== Code Box Mouse Tilt =====
+    (function() {
+      const codeBox = document.querySelector('.hero__code-box');
+      if (!codeBox) return;
+
+      const maxTilt = 35;      // 최대 기울기 (도)
+      const maxShift = 18;     // 최대 이동 (px)
+      const maxScale = 1.06;   // 호버 시 확대
+      let isHovering = false;
+      let currentRotateX = 0, currentRotateY = 0;
+      let currentShiftX = 0, currentShiftY = 0;
+      let currentScale = 1;
+      let targetRotateX = 0, targetRotateY = 0;
+      let targetShiftX = 0, targetShiftY = 0;
+      let targetScale = 1;
+      let rafId = null;
+
+      function lerp(a, b, t) { return a + (b - a) * t; }
+
+      function animate() {
+        const speed = isHovering ? 0.12 : 0.06;
+        currentRotateX = lerp(currentRotateX, targetRotateX, speed);
+        currentRotateY = lerp(currentRotateY, targetRotateY, speed);
+        currentShiftX = lerp(currentShiftX, targetShiftX, speed);
+        currentShiftY = lerp(currentShiftY, targetShiftY, speed);
+        currentScale = lerp(currentScale, targetScale, speed);
+
+        codeBox.style.transform =
+          `perspective(600px) rotateX(${currentRotateX}deg) rotateY(${currentRotateY}deg) translate(${currentShiftX}px, ${currentShiftY}px) scale(${currentScale})`;
+
+        // 거의 정지 상태면 멈춤
+        if (!isHovering &&
+            Math.abs(currentRotateX) < 0.01 && Math.abs(currentRotateY) < 0.01 &&
+            Math.abs(currentShiftX) < 0.01 && Math.abs(currentShiftY) < 0.01 &&
+            Math.abs(currentScale - 1) < 0.001) {
+          codeBox.style.transform = '';
+          rafId = null;
+          return;
+        }
+        rafId = requestAnimationFrame(animate);
+      }
+
+      function startAnim() {
+        if (!rafId) rafId = requestAnimationFrame(animate);
+      }
+
+      codeBox.addEventListener('mouseenter', () => {
+        isHovering = true;
+        targetScale = maxScale;
+        startAnim();
+      });
+
+      codeBox.addEventListener('mousemove', (e) => {
+        const rect = codeBox.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;   // 0~1
+        const y = (e.clientY - rect.top) / rect.height;    // 0~1
+
+        targetRotateY = (x - 0.5) * maxTilt;
+        targetRotateX = (0.5 - y) * maxTilt;
+        targetShiftX = (x - 0.5) * maxShift;
+        targetShiftY = (y - 0.5) * maxShift;
+      });
+
+      codeBox.addEventListener('mouseleave', () => {
+        isHovering = false;
+        targetRotateX = 0;
+        targetRotateY = 0;
+        targetShiftX = 0;
+        targetShiftY = 0;
+        targetScale = 1;
+        startAnim();
+      });
     })();
 
     // ===== Cursor Orb =====
