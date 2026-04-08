@@ -1426,6 +1426,229 @@
       .project-card { flex: 0 0 100vw; }
       .project-card__wrap { max-width: 700px; }
     }
+
+    /* ===== Print / PDF Mode ===== */
+    @media print {
+      /* 기존 색상 그대로 보존 */
+      * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+      /* 모든 애니메이션/트랜지션 제거 */
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+      }
+
+      /* 페이지 설정 */
+      @page { margin: 10mm; }
+
+      /* 불필요 요소 숨김 */
+      .loader,
+      .cursor-orb,
+      .nav,
+      .projects-counter,
+      .project-cover__scroll-hint,
+      .ts-modal,
+      #tsViewAllBtn,
+      .fixed-social,
+      .contact { display: none !important; }
+
+      /* fade-up 요소 즉시 표시 */
+      .fade-up {
+        opacity: 1 !important;
+        transform: none !important;
+      }
+
+      /* ── Hero 섹션 ── */
+      .hero {
+        min-height: auto !important;
+        padding: 40px 32px !important;
+      }
+      .hero__inner {
+        flex-direction: row !important;
+        gap: 40px !important;
+      }
+      .hero__right {
+        display: block !important;
+        perspective: none !important;
+      }
+      .hero__code-box {
+        transform: none !important;
+        width: 340px !important;
+        font-size: 12px !important;
+      }
+
+      /* ── About 섹션 ── */
+      .about { padding: 40px 0 !important; }
+
+      /* ── 프로젝트: 수평 스크롤 → About 섹션 스타일 세로 배치 ── */
+      .projects-section {
+        height: auto !important;
+        padding: 0 32px !important;
+      }
+      .projects-pin {
+        position: relative !important;
+        height: auto !important;
+        overflow: visible !important;
+      }
+      .projects-track {
+        display: block !important;
+        transform: none !important;
+        height: auto !important;
+      }
+
+      /* 프로젝트 커버 → section-label + section-title 스타일 */
+      .project-cover {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: auto !important;
+        padding: 60px 0 30px 0 !important;
+        border: none !important;
+        background: transparent !important;
+      }
+      .project-cover::before,
+      .project-cover::after {
+        display: none !important;
+      }
+      .project-cover__inner {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+      .project-cover__label {
+        display: block !important;
+        font-size: 13px !important;
+        letter-spacing: 3px !important;
+        margin-bottom: 12px !important;
+        color: #c2a4ff !important;
+      }
+      .project-cover__title {
+        display: block !important;
+        font-size: 40px !important;
+        letter-spacing: -1px !important;
+        margin-bottom: 20px !important;
+        color: #eae5ec !important;
+      }
+      .project-cover__desc {
+        display: block !important;
+        font-size: 16px !important;
+        max-width: 600px !important;
+        margin-bottom: 0 !important;
+        color: #adacac !important;
+      }
+      .project-cover__count {
+        display: none !important;
+      }
+
+      /* 프로젝트 카드 */
+      .project-card {
+        display: block !important;
+        width: 100% !important;
+        height: auto !important;
+        padding: 32px !important;
+        border: 1px solid rgba(255, 255, 255, 0.08) !important;
+        border-radius: 12px !important;
+        margin-bottom: 20px !important;
+        background: rgba(255, 255, 255, 0.03) !important;
+        overflow: visible !important;
+      }
+      .project-card__wrap {
+        display: grid !important;
+        grid-template-columns: 1fr 1.2fr !important;
+        gap: 32px !important;
+        max-width: 100% !important;
+      }
+      .project-card__number {
+        font-size: 32px !important;
+        color: #eae5ec !important;
+      }
+      .project-card__title {
+        font-size: 22px !important;
+        color: #eae5ec !important;
+      }
+      .project-card__summary {
+        color: #adacac !important;
+      }
+      .project-card__right {
+        display: block !important;
+      }
+      .project-card__field {
+        display: block !important;
+        margin-bottom: 16px !important;
+        visibility: visible !important;
+      }
+      .project-card__field-label {
+        display: block !important;
+        margin-bottom: 8px !important;
+        color: #6b6b6b !important;
+        visibility: visible !important;
+      }
+      .project-card__field-content {
+        display: block !important;
+        font-size: 14px !important;
+        color: #adacac !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      .project-card__field-content ul {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        color: #adacac !important;
+      }
+      .project-card__field-content li {
+        display: list-item !important;
+        list-style: none !important;
+        position: relative !important;
+        padding-left: 16px !important;
+        margin-bottom: 4px !important;
+        color: #adacac !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        line-height: 1.8 !important;
+      }
+      .project-card__field-content li::before {
+        content: '' !important;
+        display: block !important;
+        position: absolute !important;
+        left: 0 !important;
+        top: 11px !important;
+        width: 4px !important;
+        height: 4px !important;
+        border-radius: 50% !important;
+        background: #c2a4ff !important;
+        opacity: 0.6 !important;
+      }
+
+      /* 타이핑 커서 제거 */
+      .hero__typing-text {
+        border-right: none !important;
+      }
+
+      /* ── 기술스택: 마키 → 정적 그리드 ── */
+      .techstack {
+        padding: 40px 0 !important;
+      }
+      .techstack__marquee-wrap {
+        overflow: visible !important;
+      }
+      .techstack__marquee-wrap::before,
+      .techstack__marquee-wrap::after {
+        display: none !important;
+      }
+      .techstack__marquee-row {
+        flex-wrap: wrap !important;
+        width: auto !important;
+        gap: 10px !important;
+        padding: 6px 0 !important;
+        justify-content: flex-start;
+      }
+
+      /* ── 유지보수 섹션 ── */
+      .maint { padding: 40px 0 !important; }
+
+      /* ── Footer ── */
+      .footer { padding: 20px 0 !important; }
+    }
   </style>
 </head>
 <body>
@@ -1955,34 +2178,37 @@
     })();
 
     // ===== Typing Animation =====
+    var _typingTimer = null;
+    var _typingStopped = false;
     (function() {
       const phrases = ['Full-Stack Developer', 'Backend Engineer', 'DevOps Enthusiast'];
       const el = document.getElementById('typingText');
       let phraseIdx = 0, charIdx = 0, isDeleting = false;
 
       function type() {
+        if (_typingStopped) return;
         const current = phrases[phraseIdx];
         if (!isDeleting) {
           el.textContent = current.substring(0, charIdx + 1);
           charIdx++;
           if (charIdx === current.length) {
-            setTimeout(() => { isDeleting = true; type(); }, 2000);
+            _typingTimer = setTimeout(() => { isDeleting = true; type(); }, 2000);
             return;
           }
-          setTimeout(type, 80);
+          _typingTimer = setTimeout(type, 80);
         } else {
           el.textContent = current.substring(0, charIdx - 1);
           charIdx--;
           if (charIdx === 0) {
             isDeleting = false;
             phraseIdx = (phraseIdx + 1) % phrases.length;
-            setTimeout(type, 500);
+            _typingTimer = setTimeout(type, 500);
             return;
           }
-          setTimeout(type, 40);
+          _typingTimer = setTimeout(type, 40);
         }
       }
-      setTimeout(type, 1200);
+      _typingTimer = setTimeout(type, 1200);
     })();
 
     // ===== Code Box Mouse Tilt =====
@@ -2301,6 +2527,37 @@
     // Init horizontal scroll
     window.addEventListener('DOMContentLoaded', setupHorizontalScroll);
     window.addEventListener('resize', setupHorizontalScroll);
+
+    // ===== Print Mode — 동적 요소 고정 =====
+    window.addEventListener('beforeprint', () => {
+      // 타이핑 애니메이션 중단 및 텍스트 고정
+      _typingStopped = true;
+      if (_typingTimer) clearTimeout(_typingTimer);
+      const typingEl = document.getElementById('typingText');
+      if (typingEl) typingEl.textContent = 'Full-Stack Developer';
+
+      // 숫자 카운트업 즉시 최종값으로
+      document.querySelectorAll('.hero__stat-number[data-target]').forEach(el => {
+        el.textContent = el.dataset.target + (el.dataset.suffix || '');
+      });
+
+      // 마키 중복 제거 (seamless loop용 html+html → 1회만)
+      [mr1, mr2].forEach((row, i) => {
+        if (!row) return;
+        const items = i === 0 ? techRow1 : techRow2;
+        row.innerHTML = buildMarqueeCards(items);
+      });
+
+      // 수평 스크롤 transform 제거
+      const track = document.getElementById('projectsTrack');
+      if (track) track.style.transform = 'none';
+    });
+
+    window.addEventListener('afterprint', () => {
+      // 인쇄 후 마키 복원
+      if (mr1) initMarquee(mr1, techRow1);
+      if (mr2) initMarquee(mr2, techRow2);
+    });
   </script>
 
 </body>
