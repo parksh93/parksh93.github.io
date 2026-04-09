@@ -484,7 +484,7 @@
       display: flex;
       height: 100vh;
       align-items: stretch;
-      will-change: transform;
+      /* will-change: transform → JS에서 동적 추가 (프린트 시 GPU 레이어 문제 방지) */
     }
 
     /* Counter indicator */
@@ -1432,10 +1432,11 @@
       /* 기존 색상 그대로 보존 */
       * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
 
-      /* 모든 애니메이션/트랜지션 제거 */
+      /* 모든 애니메이션/트랜지션/GPU레이어 제거 */
       *, *::before, *::after {
         animation: none !important;
         transition: none !important;
+        will-change: auto !important;
       }
 
       /* 페이지 설정 */
@@ -1645,6 +1646,26 @@
 
       /* ── 유지보수 섹션 ── */
       .maint { padding: 40px 0 !important; }
+
+      /* ── 페이지 넘김 제어 ── */
+      .project-card,
+      .maint-card {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+      .project-card__field {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+      .project-card__tags,
+      .maint-card__tags {
+        break-inside: avoid !important;
+        page-break-inside: avoid !important;
+      }
+      .section {
+        break-before: auto !important;
+        page-break-before: auto !important;
+      }
 
       /* ── Footer ── */
       .footer { padding: 20px 0 !important; }
@@ -2364,6 +2385,7 @@
 
       // Section height = total horizontal scroll distance + one viewport
       section.style.height = (totalScroll + window.innerHeight) + 'px';
+      track.style.willChange = 'transform';
 
       scrollHandler = function() {
         const sectionTop = section.getBoundingClientRect().top;
@@ -2548,15 +2570,25 @@
         row.innerHTML = buildMarqueeCards(items);
       });
 
-      // 수평 스크롤 transform 제거
+      // 수평 스크롤 → 세로 배치: GPU 레이어 해제 + 레이아웃 리셋
+      const section = document.querySelector('.projects-section');
+      const pin = document.getElementById('projectsPin');
       const track = document.getElementById('projectsTrack');
-      if (track) track.style.transform = 'none';
+
+      if (section) section.style.height = 'auto';
+      if (pin) { pin.style.position = 'relative'; pin.style.height = 'auto'; pin.style.overflow = 'visible'; }
+      if (track) { track.style.transform = 'none'; track.style.willChange = 'auto'; }
     });
 
     window.addEventListener('afterprint', () => {
       // 인쇄 후 마키 복원
       if (mr1) initMarquee(mr1, techRow1);
       if (mr2) initMarquee(mr2, techRow2);
+
+      // 인쇄 후 레이아웃 복원
+      const pin = document.getElementById('projectsPin');
+      if (pin) { pin.style.position = ''; pin.style.height = ''; pin.style.overflow = ''; }
+      setupHorizontalScroll();
     });
   </script>
 
