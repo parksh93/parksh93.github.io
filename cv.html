@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>경력기술서 - 박상현</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap');
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      background: #f5f5f5;
+      color: #333;
+      line-height: 1.7;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 40px auto;
+      background: #fff;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.08);
+    }
+
+    /* 헤더 */
+    .header {
+      background: #1565c0;
+      color: #fff;
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .header .photo {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,0.5);
+      flex-shrink: 0;
+    }
+
+    .header-text h1 {
+      font-size: 26px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .header-text .subtitle {
+      font-size: 14px;
+      font-weight: 300;
+      opacity: 0.9;
+    }
+
+    /* 재직 정보 바 */
+    .company-bar {
+      background: #fafafa;
+      border-bottom: 2px solid #1565c0;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+    }
+
+    .company-bar .period {
+      font-weight: 700;
+      color: #1565c0;
+    }
+
+    .company-bar .divider {
+      color: #ccc;
+    }
+
+    .company-bar .company {
+      font-weight: 600;
+    }
+
+    .company-bar .position {
+      color: #777;
+    }
+
+    /* 본문 */
+    .content {
+      padding: 0 40px 40px;
+    }
+
+    /* 섹션 */
+    .section {
+      margin-top: 32px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1565c0;
+      padding-bottom: 8px;
+      border-bottom: 2px solid #1565c0;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 4px;
+      height: 18px;
+      background: #1565c0;
+      border-radius: 2px;
+    }
+
+    /* 주요업무 */
+    .main-role {
+      font-size: 15px;
+      font-weight: 500;
+      margin-bottom: 10px;
+    }
+
+    .tech-stack {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tech-stack .tag {
+      background: #e3f2fd;
+      color: #0d47a1;
+      font-size: 12px;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 14px;
+    }
+
+    /* 프로젝트 요약 테이블 */
+    .project-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .project-table thead th {
+      background: #1565c0;
+      color: #fff;
+      padding: 10px 12px;
+      text-align: left;
+      font-weight: 500;
+    }
+
+    .project-table tbody td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #eee;
+      vertical-align: top;
+    }
+
+    .project-table tbody tr:hover {
+      background: #fafafa;
+    }
+
+    .project-table .pj-name {
+      font-weight: 600;
+      color: #333;
+    }
+
+    /* 프로젝트 상세 카드 */
+    .project-card {
+      background: #fafafa;
+      border-left: 4px solid #1565c0;
+      border-radius: 0 8px 8px 0;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+    }
+
+    .project-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      color: #333;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-card h3 .num {
+      background: #1565c0;
+      color: #fff;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .project-meta {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 20px;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .project-meta .meta-item {
+      display: flex;
+      gap: 6px;
+    }
+
+    .project-meta .meta-label {
+      color: #999;
+      font-weight: 500;
+      white-space: nowrap;
+      min-width: 60px;
+    }
+
+    .project-meta .meta-value {
+      color: #444;
+      font-weight: 400;
+    }
+
+    .project-meta .full-width {
+      grid-column: 1 / -1;
+    }
+
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 16px;
+    }
+
+    .tech-list .chip {
+      background: #fff;
+      border: 1px solid #e0e0e0;
+      color: #555;
+      font-size: 11px;
+      font-weight: 500;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .task-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #1565c0;
+      margin-bottom: 8px;
+    }
+
+    .task-list {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 14px;
+    }
+
+    .task-list li {
+      font-size: 13px;
+      padding: 3px 0 3px 16px;
+      position: relative;
+      color: #444;
+    }
+
+    .task-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 11px;
+      width: 6px;
+      height: 6px;
+      background: #1565c0;
+      border-radius: 50%;
+    }
+
+    /* 기여 포인트 */
+    .contribution {
+      background: #e8eaf6;
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin-top: 4px;
+    }
+
+    .contribution .contrib-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #283593;
+      margin-bottom: 6px;
+    }
+
+    .contribution li {
+      font-size: 13px;
+      color: #555;
+      padding: 2px 0 2px 16px;
+      position: relative;
+    }
+
+    .contribution li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px;
+      height: 6px;
+      background: #283593;
+      border-radius: 50%;
+    }
+
+    /* 프린트 */
+    @media print {
+      body { background: #fff; }
+      .container { box-shadow: none; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+
+  <!-- 헤더 -->
+  <div class="header">
+    <img src="./asset/me.jpeg" alt="프로필 사진" class="photo">
+    <div class="header-text">
+      <h1>경력기술서</h1>
+      <div class="subtitle">웹 애플리케이션 개발부터 시스템 운영, 인프라 구축까지</div>
+    </div>
+  </div>
+
+  <!-- 재직 정보 -->
+  <div class="company-bar">
+    <span class="period">2024.04 ~ 재직중</span>
+    <span class="divider">|</span>
+    <span class="company">아키아카</span>
+    <span class="divider">|</span>
+    <span class="position">매니저</span>
+  </div>
+
+  <div class="content">
+
+    <!-- 주요업무 -->
+    <div class="section">
+      <div class="section-title">주요업무</div>
+      <p class="main-role">웹 풀스택 개발 (백엔드, 프론트엔드, 퍼블리싱, 인프라)</p>
+      <div class="tech-stack">
+        <span class="tag">Java</span>
+        <span class="tag">Spring Boot</span>
+        <span class="tag">eGov Framework</span>
+        <span class="tag">MyBatis</span>
+        <span class="tag">JSP</span>
+        <span class="tag">jQuery</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">CSS</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Tibero</span>
+        <span class="tag">MariaDB</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Kubernetes</span>
+        <span class="tag">Jenkins</span>
+        <span class="tag">GitLab</span>
+        <span class="tag">Git</span>
+      </div>
+    </div>
+
+    <!-- 진행 프로젝트 -->
+    <div class="section">
+      <div class="section-title">진행 프로젝트</div>
+      <table class="project-table">
+        <thead>
+          <tr>
+            <th>프로젝트명</th>
+            <th>기간</th>
+            <th>개발 인원</th>
+            <th>기여도</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pj-name">행정정보 데이터세트 종합관리시스템</td>
+            <td>2024 ~ 2025</td>
+            <td>24년: 5→3→2명<br>25년: 5명</td>
+            <td>24년: 70%<br>25년: 30%</td>
+          </tr>
+          <tr>
+            <td class="pj-name">일정관리시스템 개발 및 시스템 하자보수</td>
+            <td>2025</td>
+            <td>3명</td>
+            <td>40%</td>
+          </tr>
+          <tr>
+            <td class="pj-name">K-PaaS 기반 개발환경 및 CI/CD 인프라 구축</td>
+            <td>2026</td>
+            <td>5명</td>
+            <td>설계 50% / 문서 40%</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 프로젝트 상세 -->
+    <div class="section">
+      <div class="section-title">프로젝트 상세</div>
+
+      <!-- 프로젝트 1 -->
+      <div class="project-card">
+        <h3><span class="num">1</span>행정정보 데이터세트 종합관리시스템</h3>
+        <div class="project-meta">
+          <div class="meta-item">
+            <span class="meta-label">발주처</span>
+            <span class="meta-value">행정안전부 국가기록원</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">담당 역할</span>
+            <span class="meta-value">풀스택 개발</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">기간</span>
+            <span class="meta-value">2024 ~ 2025 (연속 사업)</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">기여도</span>
+            <span class="meta-value">24년: 70% / 25년: 30%</span>
+          </div>
+          <div class="meta-item full-width">
+            <span class="meta-label">개발 인원</span>
+            <span class="meta-value">24년: 최초 5명 → 3명 → 2명 축소 / 25년: 5명</span>
+          </div>
+        </div>
+        <div class="tech-list">
+          <span class="chip">Java 1.8</span>
+          <span class="chip">eGov Framework</span>
+          <span class="chip">Tibero</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">MariaDB</span>
+          <span class="chip">MyBatis</span>
+          <span class="chip">JSP</span>
+          <span class="chip">jQuery</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">CSS</span>
+          <span class="chip">Docker</span>
+        </div>
+        <div class="task-title">주요 수행 내용</div>
+        <ul class="task-list">
+          <li>연계시스템 개발 및 GPKI 인증서 기반 로그인 구현</li>
+          <li>파일 암호화 패키지 및 메타 XML 자동 생성 기능 개발</li>
+          <li>민감정보 비식별화 조치 및 권한별 원데이터 조회 기능 구현</li>
+          <li>인터넷망/내부망 동시 로그인 제어 (세션 관리)</li>
+          <li>Docker 기반 배포 및 PostgreSQL/MariaDB 쿼리 변환 대응</li>
+          <li>설계 산출물 작성 (유스케이스, DB설계서, 화면설계서 등)</li>
+          <li>웹 접근성 / 시큐어 코딩 점검 및 조치</li>
+        </ul>
+      </div>
+
+      <!-- 프로젝트 2 -->
+      <div class="project-card">
+        <h3><span class="num">2</span>일정관리시스템 개발 및 시스템 하자보수</h3>
+        <div class="project-meta">
+          <div class="meta-item">
+            <span class="meta-label">발주처</span>
+            <span class="meta-value">국립중앙과학관</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">담당 역할</span>
+            <span class="meta-value">시스템 분석 및 개발</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">기간</span>
+            <span class="meta-value">2025</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">기여도</span>
+            <span class="meta-value">40%</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">개발 인원</span>
+            <span class="meta-value">3명</span>
+          </div>
+        </div>
+        <div class="tech-list">
+          <span class="chip">Java 1.8</span>
+          <span class="chip">Spring Boot</span>
+          <span class="chip">PostgreSQL</span>
+          <span class="chip">MyBatis</span>
+          <span class="chip">JSP</span>
+          <span class="chip">jQuery</span>
+          <span class="chip">JavaScript</span>
+          <span class="chip">Maven</span>
+        </div>
+        <div class="task-title">주요 수행 내용</div>
+        <ul class="task-list">
+          <li>기존 시스템 소스 분석 및 구조 파악</li>
+          <li>100건 이상의 하자사항 도출 및 대부분 직접 처리</li>
+          <li>FullCalendar 기반 일정 조회 기능 개발 및 커스터마이징 적용</li>
+        </ul>
+        <div class="contribution">
+          <div class="contrib-title">본인 기여 포인트</div>
+          <ul style="list-style:none; padding:0;">
+            <li>하자보수 과정에서 100건 이상의 이슈 중 대부분을 직접 처리하여 고객과의 신뢰 회복</li>
+            <li>신뢰 회복을 기반으로 신규 일정관리 기능 개발 사업 수주에 기여</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- 프로젝트 3 -->
+      <div class="project-card">
+        <h3><span class="num">3</span>K-PaaS 기반 개발환경 및 CI/CD 인프라 구축</h3>
+        <div class="project-meta">
+          <div class="meta-item">
+            <span class="meta-label">발주처</span>
+            <span class="meta-value">대구미래교육연구원</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">담당 역할</span>
+            <span class="meta-value">인프라 설계</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">기간</span>
+            <span class="meta-value">2026</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">기여도</span>
+            <span class="meta-value">설계 50% / 문서작업 40%</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">개발 인원</span>
+            <span class="meta-value">5명 (K-PaaS 구성 2명)</span>
+          </div>
+        </div>
+        <div class="tech-list">
+          <span class="chip">K-PaaS</span>
+          <span class="chip">Kubernetes</span>
+          <span class="chip">Docker</span>
+          <span class="chip">Harbor</span>
+          <span class="chip">GitLab</span>
+          <span class="chip">Jenkins</span>
+          <span class="chip">Grafana</span>
+          <span class="chip">Prometheus</span>
+          <span class="chip">Loki</span>
+        </div>
+        <div class="task-title">주요 수행 내용</div>
+        <ul class="task-list">
+          <li>K-PaaS 기반 Kubernetes 개발환경 설계</li>
+          <li>GitLab + Jenkins 파이프라인 자동 배포 환경 설계</li>
+          <li>Grafana / Prometheus / Loki 모니터링 시스템 설계</li>
+          <li>Harbor를 활용한 컨테이너 오케스트레이션 환경 설계</li>
+          <li>설계 산출물 문서 작성</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
