@@ -31,7 +31,7 @@
 
     /* 헤더 */
     .header {
-      background: #1565c0;
+      background: #303f9f;
       color: #fff;
       padding: 32px 40px;
       display: flex;
@@ -60,10 +60,30 @@
       opacity: 0.9;
     }
 
+    .header-contact {
+      font-size: 13px;
+      font-weight: 400;
+      opacity: 0.85;
+      margin-left: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      text-align: right;
+    }
+
+    .header-contact a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    .header-contact a:hover {
+      text-decoration: underline;
+    }
+
     /* 재직 정보 바 */
     .company-bar {
       background: #fafafa;
-      border-bottom: 2px solid #1565c0;
+      border-bottom: 2px solid #303f9f;
       padding: 16px 40px;
       display: flex;
       align-items: center;
@@ -73,7 +93,7 @@
 
     .company-bar .period {
       font-weight: 700;
-      color: #1565c0;
+      color: #303f9f;
     }
 
     .company-bar .divider {
@@ -101,9 +121,9 @@
     .section-title {
       font-size: 17px;
       font-weight: 700;
-      color: #1565c0;
+      color: #303f9f;
       padding-bottom: 8px;
-      border-bottom: 2px solid #1565c0;
+      border-bottom: 2px solid #303f9f;
       margin-bottom: 16px;
       display: flex;
       align-items: center;
@@ -115,7 +135,7 @@
       display: inline-block;
       width: 4px;
       height: 18px;
-      background: #1565c0;
+      background: #303f9f;
       border-radius: 2px;
     }
 
@@ -133,8 +153,8 @@
     }
 
     .tech-stack .tag {
-      background: #e3f2fd;
-      color: #0d47a1;
+      background: #e8eaf6;
+      color: #303f9f;
       font-size: 12px;
       font-weight: 500;
       padding: 4px 10px;
@@ -149,7 +169,7 @@
     }
 
     .project-table thead th {
-      background: #1565c0;
+      background: #303f9f;
       color: #fff;
       padding: 10px 12px;
       text-align: left;
@@ -174,7 +194,7 @@
     /* 프로젝트 상세 카드 */
     .project-card {
       background: #fafafa;
-      border-left: 4px solid #1565c0;
+      border-left: 4px solid #303f9f;
       border-radius: 0 8px 8px 0;
       padding: 24px 28px;
       margin-bottom: 20px;
@@ -191,7 +211,7 @@
     }
 
     .project-card h3 .num {
-      background: #1565c0;
+      background: #303f9f;
       color: #fff;
       width: 24px;
       height: 24px;
@@ -253,7 +273,7 @@
     .task-title {
       font-size: 13px;
       font-weight: 700;
-      color: #1565c0;
+      color: #303f9f;
       margin-bottom: 8px;
     }
 
@@ -277,7 +297,7 @@
       top: 11px;
       width: 6px;
       height: 6px;
-      background: #1565c0;
+      background: #303f9f;
       border-radius: 50%;
     }
 
@@ -314,10 +334,62 @@
       border-radius: 50%;
     }
 
+    /* 유지보수 카드 */
+    .project-card.maintenance {
+      background: #fafafa;
+      border-left: 4px solid #5c6bc0;
+    }
+
+    .project-card.maintenance h3 .num {
+      background: #5c6bc0;
+    }
+
+    .project-card.maintenance .task-title {
+      color: #3949ab;
+    }
+
+    .project-card.maintenance .task-list li::before {
+      background: #5c6bc0;
+    }
+
+    /* PDF 다운로드 버튼 */
+    .pdf-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #303f9f;
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 600;
+      font-family: 'Noto Sans KR', sans-serif;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(48, 63, 159, 0.4);
+      transition: background 0.2s, transform 0.2s;
+      z-index: 1000;
+    }
+
+    .pdf-btn:hover {
+      background: #283593;
+      transform: translateY(-2px);
+    }
+
     /* 프린트 */
+    @page {
+      margin: 0;
+    }
+
     @media print {
-      body { background: #fff; }
-      .container { box-shadow: none; margin: 0; }
+      body { background: #fff; margin: 0; }
+      .container { box-shadow: none; margin: 0; max-width: 100%; }
+      .pdf-btn { display: none; }
+      .project-card { break-inside: avoid; page-break-inside: avoid; }
+      .section { break-inside: avoid; page-break-inside: avoid; }
+      .contribution { break-inside: avoid; page-break-inside: avoid; }
+      .section-title { break-after: avoid; page-break-after: avoid; }
+      .project-card h3 { break-after: avoid; page-break-after: avoid; }
     }
   </style>
 </head>
@@ -329,14 +401,19 @@
   <div class="header">
     <img src="./asset/me.jpeg" alt="프로필 사진" class="photo">
     <div class="header-text">
-      <h1>경력기술서</h1>
+      <h1>박상현</h1>
+      <div class="subtitle" style="font-size: 18px; font-weight: 700; opacity: 1;">Developer</div>
       <div class="subtitle">웹 애플리케이션 개발부터 시스템 운영, 인프라 구축까지</div>
+    </div>
+    <div class="header-contact">
+      <span>Tel. <a href="tel:010-8527-5377">010-8527-5377</a></span>
+      <span>Email. <a href="mailto:sanghyun8527@gmail.com">sanghyun8527@gmail.com</a></span>
     </div>
   </div>
 
   <!-- 재직 정보 -->
   <div class="company-bar">
-    <span class="period">2024.04 ~ 재직중</span>
+    <span class="period">2024.04 ~ 재직중 (2년)</span>
     <span class="divider">|</span>
     <span class="company">아키아카</span>
     <span class="divider">|</span>
@@ -348,7 +425,18 @@
     <!-- 주요업무 -->
     <div class="section">
       <div class="section-title">주요업무</div>
-      <p class="main-role">웹 풀스택 개발 (백엔드, 프론트엔드, 퍼블리싱, 인프라)</p>
+      <p class="main-role">웹 개발 및 유지보수</p>
+      <ul class="task-list">
+        <li>공공기관 행정정보 관리시스템 개발 (보안 인증, 데이터 암호화/비식별화, 세션 제어)</li>
+        <li>기존 시스템 분석 및 하자보수 대응, 신규 기능 개발</li>
+        <li>K-PaaS 기반 Kubernetes 개발환경 및 CI/CD 인프라 설계</li>
+        <li>RFID 시스템, Proxy 서버 등 운영 시스템 유지보수</li>
+      </ul>
+    </div>
+
+    <!-- 기술 스택 -->
+    <div class="section">
+      <div class="section-title">기술 스택</div>
       <div class="tech-stack">
         <span class="tag">Java</span>
         <span class="tag">Spring Boot</span>
@@ -398,7 +486,7 @@
             <td class="pj-name">K-PaaS 기반 개발환경 및 CI/CD 인프라 구축</td>
             <td>2026</td>
             <td>5명</td>
-            <td>설계 50% / 문서 40%</td>
+            <td>개발환경 구축 50% / 설계 40%</td>
           </tr>
         </tbody>
       </table>
@@ -418,7 +506,7 @@
           </div>
           <div class="meta-item">
             <span class="meta-label">담당 역할</span>
-            <span class="meta-value">풀스택 개발</span>
+            <span class="meta-value">시스템 분석 및 개발</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">기간</span>
@@ -455,6 +543,7 @@
           <li>Docker 기반 배포 및 PostgreSQL/MariaDB 쿼리 변환 대응</li>
           <li>설계 산출물 작성 (유스케이스, DB설계서, 화면설계서 등)</li>
           <li>웹 접근성 / 시큐어 코딩 점검 및 조치</li>
+          <li>고객과의 직접 소통을 통한 하자보수 단독 대처</li>
         </ul>
       </div>
 
@@ -500,9 +589,10 @@
           <li>FullCalendar 기반 일정 조회 기능 개발 및 커스터마이징 적용</li>
         </ul>
         <div class="contribution">
-          <div class="contrib-title">본인 기여 포인트</div>
+          <div class="contrib-title">기여 포인트</div>
           <ul style="list-style:none; padding:0;">
-            <li>하자보수 과정에서 100건 이상의 이슈 중 대부분을 직접 처리하여 고객과의 신뢰 회복</li>
+            <li>타부서에서 개발한 시스템 인수인계 받아 하자보수 진행</li>
+            <li>하자보수 과정에서 100건 이상의 이슈 중 대부분을 처리하여 고객과의 신뢰 회복</li>
             <li>신뢰 회복을 기반으로 신규 일정관리 기능 개발 사업 수주에 기여</li>
           </ul>
         </div>
@@ -526,7 +616,7 @@
           </div>
           <div class="meta-item">
             <span class="meta-label">기여도</span>
-            <span class="meta-value">설계 50% / 문서작업 40%</span>
+            <span class="meta-value">개발환경 구축 50% / 설계 30%</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">개발 인원</span>
@@ -554,9 +644,51 @@
         </ul>
       </div>
 
+      <!-- 프로젝트 4 -->
+      <div class="project-card maintenance">
+        <h3><span class="num">4</span>RFID 시스템 유지보수</h3>
+        <div class="project-meta">
+          <div class="meta-item">
+            <span class="meta-label">발주처</span>
+            <span class="meta-value">부여군청</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">담당 역할</span>
+            <span class="meta-value">유지보수</span>
+          </div>
+        </div>
+        <div class="task-title">주요 수행 내용</div>
+        <ul class="task-list">
+          <li>RFID 기반 업무 시스템 운영 안정화</li>
+          <li>장애 분석 및 신속 대응</li>
+        </ul>
+      </div>
+
+      <!-- 프로젝트 5 -->
+      <div class="project-card maintenance">
+        <h3><span class="num">5</span>Proxy 서버 유지보수</h3>
+        <div class="project-meta">
+          <div class="meta-item">
+            <span class="meta-label">발주처</span>
+            <span class="meta-value">과학기술정책연구원</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-label">담당 역할</span>
+            <span class="meta-value">유지보수</span>
+          </div>
+        </div>
+        <div class="task-title">주요 수행 내용</div>
+        <ul class="task-list">
+          <li>Proxy 시스템 모니터링</li>
+          <li>요청 대응 및 시스템 개선 수행</li>
+        </ul>
+      </div>
+
     </div>
   </div>
 </div>
+
+<button class="pdf-btn" onclick="window.print()">PDF 다운로드</button>
 
 </body>
 </html>
