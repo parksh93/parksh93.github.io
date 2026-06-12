@@ -80,34 +80,6 @@
       text-decoration: underline;
     }
 
-    /* 재직 정보 바 */
-    .company-bar {
-      background: #fafafa;
-      border-bottom: 2px solid #303f9f;
-      padding: 16px 40px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 15px;
-    }
-
-    .company-bar .period {
-      font-weight: 700;
-      color: #303f9f;
-    }
-
-    .company-bar .divider {
-      color: #ccc;
-    }
-
-    .company-bar .company {
-      font-weight: 600;
-    }
-
-    .company-bar .position {
-      color: #777;
-    }
-
     /* 본문 */
     .content {
       padding: 0 40px 40px;
@@ -189,6 +161,41 @@
     .project-table .pj-name {
       font-weight: 600;
       color: #333;
+    }
+
+    /* 자격증 테이블 */
+    .cert-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    .cert-table td {
+      padding: 16px 12px;
+      border-bottom: 1px solid #eee;
+      vertical-align: middle;
+    }
+
+    .cert-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .cert-table .cert-date {
+      width: 160px;
+      padding-left: 40px;
+      color: #777;
+      white-space: nowrap;
+    }
+
+    .cert-table .cert-name {
+      font-weight: 700;
+      color: #333;
+      margin-right: 8px;
+    }
+
+    .cert-table .cert-org {
+      color: #999;
+      font-size: 13px;
     }
 
     /* 프로젝트 상세 카드 */
@@ -385,11 +392,18 @@
       body { background: #fff; margin: 0; }
       .container { box-shadow: none; margin: 0; max-width: 100%; }
       .pdf-btn { display: none; }
-      .project-card { break-inside: avoid; page-break-inside: avoid; }
-      .section { break-inside: avoid; page-break-inside: avoid; }
-      .contribution { break-inside: avoid; page-break-inside: avoid; }
+
+      /* PDF 출력 원칙: 페이지를 끝까지 채우되(공백 최소화), 콘텐츠 "덩어리"는 중간에 잘리지 않게 한다.
+         큰 .section 래퍼에는 break-inside:avoid 를 걸지 않는다 — 섹션이 통째로 다음 장으로 밀려 하단 공백이 생기는 원인.
+         대신 잘리면 안 되는 최소 단위(카드/표의 행/연속 블록)만 보호하고, 제목은 본문과 함께 움직이게 한다. */
       .section-title { break-after: avoid; page-break-after: avoid; }
+      .project-card { break-inside: avoid; page-break-inside: avoid; }
       .project-card h3 { break-after: avoid; page-break-after: avoid; }
+      .contribution { break-inside: avoid; page-break-inside: avoid; }
+      .cert-table tr,
+      .project-table tr { break-inside: avoid; page-break-inside: avoid; }
+      .tech-stack,
+      .task-list { break-inside: avoid; page-break-inside: avoid; }
     }
   </style>
 </head>
@@ -411,16 +425,55 @@
     </div>
   </div>
 
-  <!-- 재직 정보 -->
-  <div class="company-bar">
-    <span class="period">2024.04.22 ~ 2026.04.30</span>
-    <span class="divider">|</span>
-    <span class="company">아키아카 [기록과학본부]</span>
-    <span class="divider">|</span>
-    <span class="position">매니저</span>
-  </div>
-
   <div class="content">
+
+    <!-- 경력사항 -->
+    <div class="section">
+      <div class="section-title">경력사항</div>
+      <table class="project-table">
+        <thead>
+          <tr>
+            <th>회사명</th>
+            <th>부서</th>
+            <th>직급</th>
+            <th>재직기간</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="pj-name">아키아카</td>
+            <td>기록과학본부</td>
+            <td>매니저</td>
+            <td>2024.04.22 ~ 2026.04.30</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 자격증 -->
+    <div class="section">
+      <div class="section-title">자격증</div>
+      <table class="cert-table">
+        <tbody>
+          <tr>
+            <td class="cert-date">2024. 12</td>
+            <td><span class="cert-name">정보처리기사</span><span class="cert-org">한국산업인력공단</span></td>
+          </tr>
+          <tr>
+            <td class="cert-date">2020. 10</td>
+            <td><span class="cert-name">SQL개발자(SQLD)</span><span class="cert-org">한국데이터산업진흥원</span></td>
+          </tr>
+          <tr>
+            <td class="cert-date">2019. 07</td>
+            <td><span class="cert-name">생산자동화기능사</span><span class="cert-org">한국산업인력공단</span></td>
+          </tr>
+          <tr>
+            <td class="cert-date">2023. 06</td>
+            <td><span class="cert-name">컴퓨터활용능력 1급</span><span class="cert-org">대한상공회의소</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
     <!-- 주요업무 -->
     <div class="section">
@@ -483,7 +536,7 @@
             <td>40%</td>
           </tr>
           <tr>
-            <td class="pj-name">K-PaaS 기반 개발환경 및 CI/CD 인프라 구축</td>
+            <td class="pj-name">서·논·구술형 평가 플랫폼</td>
             <td>2026</td>
             <td>5명</td>
             <td>개발환경 구축 50% / 설계 40%</td>
@@ -600,7 +653,7 @@
 
       <!-- 프로젝트 3 -->
       <div class="project-card">
-        <h3><span class="num">3</span>K-PaaS 기반 개발환경 및 CI/CD 인프라 구축</h3>
+        <h3><span class="num">3</span>서·논·구술형 평가 플랫폼</h3>
         <div class="project-meta">
           <div class="meta-item">
             <span class="meta-label">발주처</span>
@@ -608,7 +661,7 @@
           </div>
           <div class="meta-item">
             <span class="meta-label">담당 역할</span>
-            <span class="meta-value">인프라 설계</span>
+            <span class="meta-value">인프라 구성/설계</span>
           </div>
           <div class="meta-item">
             <span class="meta-label">기간</span>
