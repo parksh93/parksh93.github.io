@@ -2028,7 +2028,7 @@
 </head>
 <body>
 
-  <!-- Loading Screen -->
+  <!-- Loading Screen (로딩바 비활성화 — 입장 모션만 유지)
   <div class="loader" id="loader">
     <div class="loader__watermark loader__watermark--bottom">FULL-STACK DEVELOPER</div>
     <div class="loader__pill">
@@ -2037,6 +2037,7 @@
       <span class="loader__percent" id="loaderPercent">0%</span>
     </div>
   </div>
+  -->
 
   <!-- Cursor Orb -->
   <div class="cursor-orb" id="cursorOrb"></div>
@@ -2560,6 +2561,9 @@
     window.scrollTo(0, 0);
     if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
+    // 로딩바 비활성화 — 입장 모션(contentReveal)만 즉시 실행
+    document.body.classList.add('loader-reveal');
+    /*
     (function() {
       const loader = document.getElementById('loader');
       const percentEl = document.getElementById('loaderPercent');
@@ -2606,6 +2610,7 @@
       }
       requestAnimationFrame(tick);
     })();
+    */
 
     // ===== Typing Animation =====
     var _typingTimer = null;
