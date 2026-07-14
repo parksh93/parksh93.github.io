@@ -763,6 +763,7 @@
     .techstack {
       position: relative;
       overflow: hidden;
+      padding-top: 0 !important;
       padding-bottom: 0 !important;
     }
 
@@ -1115,6 +1116,331 @@
       gap: 8px;
     }
 
+    /* ===== Troubleshooting ===== */
+    .trouble__header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .trouble__view-all {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .trouble__view-all:hover {
+      border-color: rgba(194, 164, 255, 0.3);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .trouble-carousel {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .trouble-carousel__arrow {
+      flex-shrink: 0;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .trouble-carousel__arrow:hover {
+      border-color: rgba(194, 164, 255, 0.3);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .trouble-carousel__arrow:disabled {
+      opacity: 0.25;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    .trouble-carousel__viewport {
+      flex: 1;
+      overflow: hidden;
+      /* 높이는 JS가 현재 카드에 맞춰 갱신 — 카드별 높이 차이에 대응 */
+      transition: height 0.5s cubic-bezier(.25,.1,.25,1);
+    }
+
+    .trouble-carousel__track {
+      display: flex;
+      align-items: flex-start;
+      transition: transform 0.5s cubic-bezier(.25,.1,.25,1);
+    }
+
+    .trouble-card {
+      flex: 0 0 100%;
+      min-width: 0;
+      padding: 36px 40px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+    }
+
+    .trouble-card__project {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .trouble-card__title {
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 24px;
+    }
+
+    .trouble-card__body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .trouble-card__block {
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+    }
+
+    .trouble-card__block-label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .trouble-card__block--wide {
+      grid-column: 1 / -1;
+    }
+
+    .trouble-card__block-text {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .trouble-card__block-text ol,
+    .trouble-card__block-text ul {
+      margin-top: 8px;
+      padding-left: 20px;
+    }
+
+    .trouble-card__block-text ol { list-style: decimal; }
+    .trouble-card__block-text ul { list-style: disc; }
+
+    .trouble-card__block-text li {
+      margin-bottom: 6px;
+      line-height: 1.6;
+    }
+
+    .trouble-card__block-text li:last-child { margin-bottom: 0; }
+
+    .trouble-card__block-text li::marker { color: var(--accent); }
+
+    .trouble-card__block-sub {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 14px;
+    }
+
+    .trouble-card__block-sub:first-child { margin-top: 0; }
+
+    /* 처리 과정 다이어그램 */
+    .trouble-flow {
+      margin-top: 16px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+    }
+
+    .trouble-flow__label {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 1px;
+      margin-bottom: 14px;
+    }
+
+    .trouble-flow__steps {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .trouble-flow__step {
+      padding: 8px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .trouble-flow__arrow {
+      flex-shrink: 0;
+      color: var(--accent);
+      font-size: 14px;
+      opacity: 0.7;
+    }
+
+    .trouble-flow__branch {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .trouble-flow__result {
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-size: 13px;
+    }
+
+    .trouble-flow__result--pass {
+      color: #7ee2a8;
+      background: rgba(126, 226, 168, 0.08);
+      border: 1px solid rgba(126, 226, 168, 0.25);
+    }
+
+    .trouble-flow__result--fail {
+      color: #ff9f9f;
+      background: rgba(255, 159, 159, 0.06);
+      border: 1px solid rgba(255, 159, 159, 0.2);
+    }
+
+    .trouble-card__footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .trouble-card__tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .trouble-card__link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      transition: all var(--transition);
+    }
+
+    .trouble-card__link:hover {
+      border-color: rgba(194, 164, 255, 0.3);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .trouble-carousel__dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 28px;
+    }
+
+    .trouble-carousel__dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: none;
+      border-radius: 100px;
+      background: rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .trouble-carousel__dot.active {
+      width: 24px;
+      background: var(--accent);
+    }
+
+    /* Troubleshooting Modal — 목록 */
+    .trouble-list {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .trouble-list__item {
+      padding: 18px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      transition: all var(--transition);
+    }
+
+    .trouble-list__item:hover {
+      background: rgba(194, 164, 255, 0.06);
+      border-color: rgba(194, 164, 255, 0.15);
+    }
+
+    .trouble-list__item-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 6px;
+    }
+
+    .trouble-list__item-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .trouble-list__item-project {
+      flex-shrink: 0;
+      font-size: 12px;
+      color: var(--accent);
+    }
+
+    .trouble-list__item-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
     /* ===== Contact ===== */
     .contact {
       border-top: 1px solid var(--border);
@@ -1410,6 +1736,11 @@
 
       .maint-grid { grid-template-columns: 1fr; }
 
+      .trouble-carousel { gap: 8px; }
+      .trouble-carousel__arrow { width: 36px; height: 36px; }
+      .trouble-card { padding: 24px 20px; }
+      .trouble-card__body { grid-template-columns: 1fr; }
+
       .contact__inner { flex-direction: column; align-items: flex-start; }
       .contact__heading { font-size: 28px; }
       .fixed-social { bottom: 16px; right: 16px; gap: 8px; }
@@ -1647,9 +1978,31 @@
       /* ── 유지보수 섹션 ── */
       .maint { padding: 40px 0 !important; }
 
+      /* ── 트러블슈팅: 캐러셀 → 세로 나열 ── */
+      .trouble { padding: 40px 32px !important; }
+      .trouble-carousel {
+        display: block !important;
+      }
+      .trouble-carousel__arrow,
+      .trouble-carousel__dots,
+      #troubleViewAllBtn { display: none !important; }
+      .trouble-carousel__viewport {
+        overflow: visible !important;
+        height: auto !important;
+      }
+      .trouble-carousel__track {
+        display: block !important;
+        transform: none !important;
+      }
+      .trouble-card {
+        margin-bottom: 16px !important;
+      }
+
       /* ── 페이지 넘김 제어 ── */
       .project-card,
-      .maint-card {
+      .maint-card,
+      .trouble-card__block,
+      .trouble-flow {
         break-inside: avoid !important;
         page-break-inside: avoid !important;
       }
@@ -1658,7 +2011,8 @@
         page-break-inside: avoid !important;
       }
       .project-card__tags,
-      .maint-card__tags {
+      .maint-card__tags,
+      .trouble-card__tags {
         break-inside: avoid !important;
         page-break-inside: avoid !important;
       }
@@ -1693,7 +2047,7 @@
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
       GitHub
     </a>
-    <a href="https://www.notion.so/1d8ba825374e43fda81959a73f995ada" class="fixed-social__btn" target="_blank" rel="noopener">
+    <a href="https://app.notion.com/p/Dev-Study-Note-8494a12c384d43eeb8c0de305902b81e" class="fixed-social__btn" target="_blank" rel="noopener">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L18.29 2.14c-.42-.326-.98-.7-2.055-.607L3.01 2.7c-.466.046-.56.28-.374.466l1.823 1.042zm.793 3.358v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.84-.046.933-.56.933-1.167V6.614c0-.606-.233-.933-.746-.886l-15.177.886c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.886l-.7.14v10.264c-.606.327-1.166.514-1.633.514-.746 0-.933-.234-1.493-.933l-4.572-7.186v6.953l1.446.327s0 .84-1.166.84l-3.218.187c-.093-.187 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.451-.233 4.759 7.278v-6.44l-1.213-.14c-.094-.514.28-.886.747-.933l3.218-.187z"/></svg>
       Notion
     </a>
@@ -1706,8 +2060,9 @@
       <ul class="nav__links" id="navLinks">
         <li><a href="#about">About</a></li>
         <li><a href="#projects">Projects</a></li>
-        <li><a href="#techstack">Tech Stack</a></li>
         <li><a href="#maintenance">Operations</a></li>
+        <li><a href="#techstack">Tech Stack</a></li>
+        <li><a href="#trouble">Troubleshooting</a></li>
         <li><a href="#contact">Contact</a></li>
       </ul>
       <button class="nav__mobile-toggle" id="mobileToggle" aria-label="Menu">
@@ -2041,48 +2396,6 @@
     </div><!-- /projects-pin -->
   </section>
 
-  <!-- Tech Stack -->
-  <section class="section techstack" id="techstack">
-    <div class="section__inner">
-      <span class="section__label fade-up">Tech Stack</span>
-      <div class="techstack__header fade-up">
-        <h2 class="section__title" style="margin-bottom:0">기술 스택</h2>
-        <button class="techstack__view-all" id="tsViewAllBtn">
-          전체목록
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
-        </button>
-      </div>
-      <p class="section__desc fade-up">실제 프로젝트에서 사용하고 경험한 기술들입니다.</p>
-
-      <!-- Row 1: Forward scroll -->
-      <div class="techstack__marquee-wrap fade-up">
-        <div class="techstack__marquee-row techstack__marquee-row--forward" id="marqueeRow1">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-
-      <!-- Row 2: Reverse scroll -->
-      <div class="techstack__marquee-wrap fade-up fade-up-delay-1">
-        <div class="techstack__marquee-row techstack__marquee-row--reverse" id="marqueeRow2">
-          <!-- Populated by JS -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Tech Stack Modal -->
-  <div class="ts-modal-overlay" id="tsModal">
-    <div class="ts-modal">
-      <div class="ts-modal__header">
-        <h3 class="ts-modal__title">기술 스택 전체목록</h3>
-        <button class="ts-modal__close" id="tsModalClose">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
-      </div>
-      <div id="tsModalContent"></div>
-    </div>
-  </div>
-
   <!-- Maintenance & Operations -->
   <section class="section" id="maintenance">
     <div class="section__inner">
@@ -2131,6 +2444,91 @@
       </div>
     </div>
   </section>
+
+  <!-- Tech Stack -->
+  <section class="section techstack" id="techstack">
+    <div class="section__inner">
+      <span class="section__label fade-up">Tech Stack</span>
+      <div class="techstack__header fade-up">
+        <h2 class="section__title" style="margin-bottom:0">기술 스택</h2>
+        <button class="techstack__view-all" id="tsViewAllBtn">
+          전체목록
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        </button>
+      </div>
+      <p class="section__desc fade-up">실제 프로젝트에서 사용하고 경험한 기술들입니다.</p>
+
+      <!-- Row 1: Forward scroll -->
+      <div class="techstack__marquee-wrap fade-up">
+        <div class="techstack__marquee-row techstack__marquee-row--forward" id="marqueeRow1">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- Row 2: Reverse scroll -->
+      <div class="techstack__marquee-wrap fade-up fade-up-delay-1">
+        <div class="techstack__marquee-row techstack__marquee-row--reverse" id="marqueeRow2">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tech Stack Modal -->
+  <div class="ts-modal-overlay" id="tsModal">
+    <div class="ts-modal">
+      <div class="ts-modal__header">
+        <h3 class="ts-modal__title">기술 스택 전체목록</h3>
+        <button class="ts-modal__close" id="tsModalClose">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div id="tsModalContent"></div>
+    </div>
+  </div>
+
+  <!-- Troubleshooting -->
+  <section class="section trouble" id="trouble">
+    <div class="section__inner">
+      <span class="section__label fade-up">Troubleshooting</span>
+      <div class="trouble__header fade-up">
+        <h2 class="section__title" style="margin-bottom:0">문제 해결 경험</h2>
+        <button class="trouble__view-all" id="troubleViewAllBtn">
+          간략하게 보기
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </button>
+      </div>
+      <p class="section__desc fade-up">프로젝트를 진행하며 겪은 문제와 이를 해결한 과정입니다.</p>
+
+      <div class="trouble-carousel fade-up">
+        <button class="trouble-carousel__arrow" id="troublePrev" aria-label="이전 사례">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="trouble-carousel__viewport">
+          <div class="trouble-carousel__track" id="troubleTrack">
+            <!-- Populated by JS (troubleData) -->
+          </div>
+        </div>
+        <button class="trouble-carousel__arrow" id="troubleNext" aria-label="다음 사례">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+      <div class="trouble-carousel__dots fade-up" id="troubleDots"></div>
+    </div>
+  </section>
+
+  <!-- Troubleshooting Modal -->
+  <div class="ts-modal-overlay" id="troubleModal">
+    <div class="ts-modal">
+      <div class="ts-modal__header">
+        <h3 class="ts-modal__title">문제 해결 경험 전체목록</h3>
+        <button class="ts-modal__close" id="troubleModalClose">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+      <div id="troubleModalContent"></div>
+    </div>
+  </div>
 
   <!-- Contact -->
   <section class="section contact" id="contact">
@@ -2556,6 +2954,242 @@
           modal.classList.remove('open');
           document.body.style.overflow = '';
         }
+      });
+    })();
+
+    // ===== Troubleshooting Carousel & Modal =====
+    (function() {
+      // 사례 데이터 — 여기에 항목을 추가하면 캐러셀 카드와 모달 목록에 자동 반영됨
+      // blocks: [{ label, text(html 가능), wide }] / diagram: 카드 하단 플로우 다이어그램 html / link: 코드 상세 URL
+      const troubleData = [
+        {
+          project: '행정정보 데이터세트 종합관리시스템',
+          title: '장기보존패키지 파일 무결성 검증',
+          blocks: [
+            {
+              label: '개요',
+              text: '국가기록원에서 기관의 기록물을 장기 보존·이관하기 위한 장기보존패키지 개발 과제입니다. 패키지에는 보존 파일(DB Dump 등 이관 대상 시스템 실데이터·첨부파일), 이관 대상 시스템 메타정보, 패키지 생성 사용자 인증서, 패키지 내 파일 메타정보가 포함됩니다.'
+            },
+            {
+              label: '문제 상황',
+              text: '장기보존을 위해 데이터·파일을 국가기록원으로 이관할 때, 해당 파일이 이관 과정에서 임의로 수정되지 않았는지(무결성) 검증할 수단이 필요했습니다.'
+            },
+            {
+              label: '해결 방법',
+              wide: true,
+              text: `
+                <div class="trouble-card__block-sub">① 전송 — 기관 → 국가기록원</div>
+                <ol>
+                  <li>FileInputStream을 통해 대상 파일 조회</li>
+                  <li>파일 내용을 읽어 SHA-512 + salt로 해시 암호화</li>
+                  <li>해시값을 16진수 문자열로 변환해 파일 메타정보 XML에 저장하고 ZIP64 형태로 패키지 생성</li>
+                </ol>
+                <div class="trouble-card__block-sub">② 인수 — 국가기록원</div>
+                <ol>
+                  <li>인수 승인 전 패키지 검사 진행</li>
+                  <li>패키지 내 파일을 조회해 전송 시와 동일한 방식으로 해시 암호화</li>
+                  <li>메타 XML에 저장된 해시값과 인수 시 계산한 해시값 비교</li>
+                  <li>동일하면 파일 변조가 없다고 판단해 통과</li>
+                </ol>`
+            },
+            {
+              label: '예외 처리',
+              wide: true,
+              text: `
+                <ul>
+                  <li>파일이 열려 있는 상태에서 패키지를 생성하면 정합성이 맞지 않을 수 있어, 파일이 닫혀 있을 때만 생성 가능하도록 처리</li>
+                  <li>메타 XML 내 해시값 또한 변조될 수 있어 메타 XML도 해시로 암호화해 함께 검증</li>
+                </ul>`
+            }
+          ],
+          diagram: `
+            <div class="trouble-flow">
+              <div class="trouble-flow__label">인수(검증) 과정</div>
+              <div class="trouble-flow__steps">
+                <span class="trouble-flow__step">패키지 인수</span>
+                <span class="trouble-flow__arrow">→</span>
+                <span class="trouble-flow__step">승인 전 패키지 검사</span>
+                <span class="trouble-flow__arrow">→</span>
+                <span class="trouble-flow__step">패키지 내 파일 조회</span>
+                <span class="trouble-flow__arrow">→</span>
+                <span class="trouble-flow__step">SHA-512 + salt 해시 재계산</span>
+                <span class="trouble-flow__arrow">→</span>
+                <span class="trouble-flow__step">메타 XML 해시값과 비교</span>
+                <span class="trouble-flow__arrow">→</span>
+                <div class="trouble-flow__branch">
+                  <span class="trouble-flow__result trouble-flow__result--pass">일치 — 변조 없음, 인수 통과</span>
+                  <span class="trouble-flow__result trouble-flow__result--fail">불일치 — 변조 의심, 검증 실패</span>
+                </div>
+              </div>
+            </div>`,
+          link: 'https://app.notion.com/p/120dde0632c7809c8eade2ac33e7d68e',
+          tags: ['SHA-512', '무결성 검증', 'ZIP64'],
+          problemSummary: '기록물 이관 시 파일이 임의로 수정되지 않았는지 검증할 수단이 필요',
+          solutionSummary: '전송 시 SHA-512 + salt 해시값을 메타 XML에 저장하고, 인수 시 재계산한 해시값과 비교해 변조 여부 검증'
+        },
+        {
+          project: '행정정보 데이터세트 종합관리시스템',
+          title: '장기보존패키지 메타데이터 XML의 웹 조회(HTML 변환)',
+          blocks: [
+            {
+              label: '개요',
+              text: '장기보존패키지 내 메타데이터 XML 파일을 다운로드하지 않고 웹에서 바로 확인할 수 있도록 해달라는 고객 요청이 있었습니다.'
+            },
+            {
+              label: '해결 방법',
+              text: `
+                <ol>
+                  <li>메타데이터 XML에 대응하는 XSLT 파일 사전 정의</li>
+                  <li>웹에서 HTML 조회 요청 시 사전 정의된 XSLT로 XML을 HTML로 변환</li>
+                  <li>변환된 HTML을 웹에서 바로 조회</li>
+                </ol>`
+            },
+            {
+              label: '기능 확장',
+              wide: true,
+              text: '사용자가 추가한 XML 파일도 동일한 이름의 XSLT 파일이 존재하면 HTML로 변환해 웹에서 조회할 수 있도록 확장 적용했습니다.'
+            }
+          ],
+          link: 'https://app.notion.com/p/XML-HTML-15edde0632c780a79a13e5b0e805b85e',
+          tags: ['XSLT', 'XML → HTML'],
+          problemSummary: '메타데이터 XML을 다운로드 없이 웹에서 바로 확인하고 싶다는 고객 요청',
+          solutionSummary: '사전 정의한 XSLT로 XML을 HTML로 변환해 웹에서 즉시 조회하도록 구현하고, 사용자 추가 XML까지 확장 적용'
+        },
+        {
+          project: '행정정보 데이터세트 종합관리시스템',
+          title: '업무망·인터넷망 동시 접속(중복 로그인) 제어',
+          blocks: [
+            {
+              label: '개요',
+              text: '동일 사용자가 여러 경로에서 중복 접속하지 못하도록 제한하는 요구사항입니다.'
+            },
+            {
+              label: '문제 상황',
+              text: '사용자의 접속 경로가 업무망과 인터넷망 두 가지로 존재하고, 망분리 환경에서 중계서버를 거치는 구조라 동시 접속 제어에 어려움이 있었습니다.'
+            },
+            {
+              label: '해결 방법',
+              wide: true,
+              text: `
+                <ol>
+                  <li>사용자 최초 로그인 시 접속한 서버의 JSESSIONID를 DB에 저장</li>
+                  <li>다른 PC에서 로그인하면 DB의 JSESSIONID를 새 값으로 업데이트</li>
+                  <li>사용자 이벤트 발생 시 현재 JSESSIONID와 DB 값이 동일한지 비교</li>
+                  <li>동일하면 정상 진행, 다르면 동일 계정 접속 감지 안내 후 강제 로그아웃</li>
+                </ol>`
+            },
+            {
+              label: '개선 필요사항',
+              wide: true,
+              text: '로그아웃 없이 브라우저를 강제 종료한 뒤 다시 로그인하면 중복 접속이 아닌데도 안내 메시지가 노출됩니다. 일정 시간 경과 시 DB에서 JSESSIONID를 제거하는 방법 등으로 사용자 혼란을 줄이는 개선을 계획하고 있습니다.'
+            }
+          ],
+          tags: ['세션 제어', '망분리', 'JSESSIONID'],
+          problemSummary: '망분리(업무망·인터넷망) 환경에서 중계서버를 거치는 구조라 동일 사용자의 동시 접속 제어가 어려움',
+          solutionSummary: 'JSESSIONID를 DB에 저장·비교해 중복 로그인을 감지하고, 안내 후 강제 로그아웃 처리'
+        }
+      ];
+
+      const track = document.getElementById('troubleTrack');
+      const dotsWrap = document.getElementById('troubleDots');
+      const prevBtn = document.getElementById('troublePrev');
+      const nextBtn = document.getElementById('troubleNext');
+      if (!track) return;
+
+      // 카드 렌더링
+      track.innerHTML = troubleData.map(item => `
+        <article class="trouble-card">
+          <span class="trouble-card__project">${item.project}</span>
+          <h3 class="trouble-card__title">${item.title}</h3>
+          <div class="trouble-card__body">
+            ${item.blocks.map(b => `
+              <div class="trouble-card__block${b.wide ? ' trouble-card__block--wide' : ''}">
+                <div class="trouble-card__block-label">${b.label}</div>
+                <div class="trouble-card__block-text">${b.text}</div>
+              </div>`).join('')}
+          </div>
+          ${item.diagram || ''}
+          <div class="trouble-card__footer">
+            <div class="trouble-card__tags">
+              ${item.tags.map(t => `<span class="tag">${t}</span>`).join('')}
+            </div>
+            ${item.link ? `
+              <a class="trouble-card__link" href="${item.link}" target="_blank" rel="noopener">
+                코드 참조
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+              </a>` : ''}
+          </div>
+        </article>`).join('');
+
+      // 페이지 도트 렌더링
+      dotsWrap.innerHTML = troubleData.map((_, i) =>
+        `<button class="trouble-carousel__dot" data-index="${i}" aria-label="${i + 1}번째 사례"></button>`
+      ).join('');
+      const dots = dotsWrap.querySelectorAll('.trouble-carousel__dot');
+
+      let current = 0;
+      const viewport = track.parentElement;
+
+      // 카드별 높이가 달라 뷰포트를 현재 카드 높이에 맞춤 (좌우 버튼이 항상 카드 세로 중앙에 오도록)
+      function syncHeight() {
+        const card = track.children[current];
+        if (card) viewport.style.height = card.offsetHeight + 'px';
+      }
+
+      function update() {
+        track.style.transform = `translateX(-${current * 100}%)`;
+        dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+        prevBtn.disabled = current === 0;
+        nextBtn.disabled = current === troubleData.length - 1;
+        syncHeight();
+      }
+
+      prevBtn.addEventListener('click', () => { if (current > 0) { current--; update(); } });
+      nextBtn.addEventListener('click', () => { if (current < troubleData.length - 1) { current++; update(); } });
+      dots.forEach(dot => dot.addEventListener('click', () => { current = Number(dot.dataset.index); update(); }));
+
+      update();
+      // 폰트 로드·화면 크기 변화로 카드 높이가 바뀌면 재계산
+      window.addEventListener('load', syncHeight);
+      window.addEventListener('resize', syncHeight);
+
+      // 자세히 보기 모달 — 목록 형태
+      const modal = document.getElementById('troubleModal');
+      const content = document.getElementById('troubleModalContent');
+      const openBtn = document.getElementById('troubleViewAllBtn');
+      const closeBtn = document.getElementById('troubleModalClose');
+
+      content.innerHTML = `
+        <div class="trouble-list">
+          ${troubleData.map(item => `
+            <div class="trouble-list__item">
+              <div class="trouble-list__item-head">
+                <span class="trouble-list__item-title">${item.title}</span>
+                <span class="trouble-list__item-project">${item.project}</span>
+              </div>
+              <p class="trouble-list__item-desc">${item.problemSummary}</p>
+              <p class="trouble-list__item-desc">→ ${item.solutionSummary}</p>
+            </div>`).join('')}
+        </div>`;
+
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      openBtn.addEventListener('click', () => {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+
+      closeBtn.addEventListener('click', closeModal);
+
+      modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
       });
     })();
 

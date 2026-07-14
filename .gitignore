@@ -3,7 +3,9 @@
 !README.md
 
 # Claude 설정
-.claude/
+#.claude/
 
 # 자소서 (개인 지원 자료 — 커밋 금지)
 자소서/
+_workspace/
+_workspace_*/
