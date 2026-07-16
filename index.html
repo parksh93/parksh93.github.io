@@ -28,7 +28,7 @@
       --transition: 0.3s ease;
     }
 
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: clip; }
 
     body {
       font-family: 'Geist', 'Noto Sans KR', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -38,6 +38,9 @@
       font-size: 16px;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      /* 100vw 요소(프로젝트 카드 등)의 스크롤바 폭 초과로 인한 가로 스크롤 방지.
+         clip은 스크롤 컨테이너를 만들지 않아 projects-pin의 sticky 동작을 깨지 않음 */
+      overflow-x: clip;
     }
 
     a { color: inherit; text-decoration: none; }
@@ -1117,6 +1120,61 @@
     }
 
     /* ===== Troubleshooting ===== */
+    /* 캐러셀(카드 영역)은 기본 컨테이너(1100px) 폭·정렬을 그대로 사용 → 제목과 같은 왼쪽 끝선에서 시작 */
+
+    /* 제목/설명과 카드 콘텐츠 사이 간격 축소 (기본 section__desc 60px → 24px) */
+    .trouble .section__desc {
+      margin-bottom: 24px;
+    }
+
+    /* 캐러셀 상단 우측 페이지 이동 버튼 — 컨테이너 폭을 채우고 우측 정렬 */
+    .trouble-carousel__meta {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 12px;
+    }
+
+    .trouble-carousel__pages {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 6px;
+      /* 카드 콘텐츠 우측 끝선에 맞춰 안쪽으로 들여쓰기 = 카드 좌우 padding(40)
+         (카드가 이제 컨테이너 전체 폭을 쓰므로 화살표 폭은 계산에서 제외) */
+      margin-right: 40px;
+    }
+
+    .trouble-carousel__page {
+      min-width: 32px;
+      height: 32px;
+      padding: 0 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text-secondary);
+      font-size: 13px;
+      font-weight: 500;
+      font-variant-numeric: tabular-nums;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .trouble-carousel__page:hover {
+      border-color: rgba(194, 164, 255, 0.3);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    .trouble-carousel__page.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: var(--bg);
+      cursor: default;
+    }
+
     .trouble__header {
       display: flex;
       align-items: center;
@@ -1144,14 +1202,17 @@
       background: var(--accent-dim);
     }
 
+    /* 카드 뷰포트가 컨테이너 전체 폭을 쓰도록 화살표는 절대배치로 카드 위에 오버레이.
+       → 카드 좌/우 끝선이 제목/컨테이너 끝선과 정확히 일치 */
     .trouble-carousel {
-      display: flex;
-      align-items: center;
-      gap: 16px;
+      position: relative;
     }
 
     .trouble-carousel__arrow {
-      flex-shrink: 0;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 2;
       width: 44px;
       height: 44px;
       display: flex;
@@ -1164,6 +1225,9 @@
       cursor: pointer;
       transition: all var(--transition);
     }
+
+    .trouble-carousel > .trouble-carousel__arrow:first-child { left: 8px; }
+    .trouble-carousel > .trouble-carousel__arrow:last-child { right: 8px; }
 
     .trouble-carousel__arrow:hover {
       border-color: rgba(194, 164, 255, 0.3);
@@ -1178,7 +1242,7 @@
     }
 
     .trouble-carousel__viewport {
-      flex: 1;
+      /* 컨테이너 전체 폭 사용 (화살표는 절대배치라 폭을 차지하지 않음) */
       overflow: hidden;
       /* 높이는 JS가 현재 카드에 맞춰 갱신 — 카드별 높이 차이에 대응 */
       transition: height 0.5s cubic-bezier(.25,.1,.25,1);
@@ -1318,6 +1382,102 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+    }
+
+    /* ── 트리형 분기 다이어그램 (fork → 2 lane → merge) ── */
+    .tflow {
+      margin-top: 4px;
+      text-align: center;
+    }
+
+    .tflow__node {
+      display: inline-block;
+      max-width: 100%;
+      padding: 8px 14px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .tflow__node--sub {
+      background: var(--accent-dim);
+      border-color: rgba(194, 164, 255, 0.25);
+    }
+
+    .tflow__node--pass {
+      color: #7ee2a8;
+      background: rgba(126, 226, 168, 0.08);
+      border-color: rgba(126, 226, 168, 0.25);
+    }
+
+    /* 세로 커넥터 (단일 흐름 구간) */
+    .tflow__conn {
+      width: 2px;
+      height: 16px;
+      margin: 6px auto;
+      background: rgba(194, 164, 255, 0.35);
+    }
+
+    /* 분기 구간: 두 레인을 나란히, 위(fork)·아래(merge) 가로 바로 연결 */
+    .tflow__split {
+      display: flex;
+      position: relative;
+      justify-content: center;
+    }
+
+    .tflow__split::before,
+    .tflow__split::after {
+      content: '';
+      position: absolute;
+      left: 25%;
+      right: 25%;
+      height: 2px;
+      background: rgba(194, 164, 255, 0.35);
+    }
+    .tflow__split::before { top: 0; }      /* fork 가로 바 */
+    .tflow__split::after { bottom: 0; }    /* merge 가로 바 */
+
+    .tflow__lane {
+      position: relative;
+      flex: 1 1 0;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 16px 8px;   /* 상하: fork/merge 세로선 공간, 좌우: 레인 간격 */
+    }
+
+    /* 각 레인의 상단(fork)·하단(merge) 세로선 — 가로 바와 노드를 연결 */
+    .tflow__lane::before,
+    .tflow__lane::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      width: 2px;
+      height: 16px;
+      background: rgba(194, 164, 255, 0.35);
+      transform: translateX(-50%);
+    }
+    .tflow__lane::before { top: 0; }
+    .tflow__lane::after { bottom: 0; }
+
+    /* 모바일: 분기를 세로로 재배치 (가로 스크롤 방지) */
+    @media (max-width: 640px) {
+      .tflow__split { flex-direction: column; gap: 6px; }
+      .tflow__split::before,
+      .tflow__split::after { display: none; }
+      .tflow__lane { padding: 0; }
+      .tflow__lane::after { display: none; }
+      .tflow__lane::before {
+        position: static;
+        transform: none;
+        margin: 6px auto;
+        display: block;
+      }
+      .tflow__lane:first-child::before { display: none; }
     }
 
     .trouble-flow__result {
@@ -1736,10 +1896,11 @@
 
       .maint-grid { grid-template-columns: 1fr; }
 
-      .trouble-carousel { gap: 8px; }
       .trouble-carousel__arrow { width: 36px; height: 36px; }
       .trouble-card { padding: 24px 20px; }
       .trouble-card__body { grid-template-columns: 1fr; }
+      /* 모바일: 카드 콘텐츠 우측 끝선 = 카드 padding(20) */
+      .trouble-carousel__pages { margin-right: 20px; }
 
       .contact__inner { flex-direction: column; align-items: flex-start; }
       .contact__heading { font-size: 28px; }
@@ -1985,6 +2146,7 @@
       }
       .trouble-carousel__arrow,
       .trouble-carousel__dots,
+      .trouble-carousel__meta,
       #troubleViewAllBtn { display: none !important; }
       .trouble-carousel__viewport {
         overflow: visible !important;
@@ -2500,6 +2662,10 @@
         </button>
       </div>
       <p class="section__desc fade-up">프로젝트를 진행하며 겪은 문제와 이를 해결한 과정입니다.</p>
+
+      <div class="trouble-carousel__meta fade-up">
+        <div class="trouble-carousel__pages" id="troublePages" role="group" aria-label="사례 페이지 이동"></div>
+      </div>
 
       <div class="trouble-carousel fade-up">
         <button class="trouble-carousel__arrow" id="troublePrev" aria-label="이전 사례">
@@ -3093,6 +3259,75 @@
           tags: ['세션 제어', '망분리', 'JSESSIONID'],
           problemSummary: '망분리(업무망·인터넷망) 환경에서 중계서버를 거치는 구조라 동일 사용자의 동시 접속 제어가 어려움',
           solutionSummary: 'JSESSIONID를 DB에 저장·비교해 중복 로그인을 감지하고, 안내 후 강제 로그아웃 처리'
+        },
+        {
+          project: '행정정보 데이터세트 종합관리시스템',
+          title: '타시스템과의 연계데이터 수신',
+          blocks: [
+            {
+              label: '개요',
+              text: `
+                국가기록원에서 IRM(정보자원관리시스템)으로부터 전체 행정기관의 행정시스템 정보를 연계해 수신하는 기능입니다. 3개 실데이터와 2개 매핑 정보에 대응하는 5개 테이블의 정보를 다음 순서로 수신합니다.
+                <ol>
+                  <li>행정기관(중앙행정기관·지자체·군·대학교 등)의 전체 시스템 정보 수신</li>
+                  <li>수신된 시스템과 각 시스템의 연계시스템정보·SW정보를 매핑할 수 있는 매핑정보 각각 수신</li>
+                  <li>매핑 테이블에 해당하는 연계시스템정보·SW정보 수신</li>
+                </ol>`
+            },
+            {
+              label: '문제 상황',
+              text: '전체 정보를 수신하는 데 3일 이상이 소요됩니다. 기존 구현은 수신 시 실테이블에 데이터를 새로 받도록 되어 있어, 수신 기간 동안 해당 기능을 사용할 수 없는 문제가 있었습니다.'
+            },
+            {
+              label: '해결 방법',
+              wide: true,
+              text: `
+                <ol>
+                  <li>수신 데이터를 기존 실테이블에 바로 받지 않고, 각 수신 단계마다 해당 단계에 대응하는 임시 테이블(총 5개)을 생성해 그곳에 수신</li>
+                  <li>전체 데이터 수신이 완료된 뒤 기존 테이블을 rename해 백업으로 명칭 변경</li>
+                  <li>임시 테이블을 본테이블 명칭으로 변경해, 수신 기간 동안에도 이전 데이터로 기능이 정상 작동하도록 조치</li>
+                </ol>`
+            },
+            {
+              label: '추가 개선',
+              wide: true,
+              text: `
+                <ul>
+                  <li>연계시스템 정보와 SW 정보 수신을 독립적인 Thread로 구성해 동시 진행 → 수신 기간 단축</li>
+                  <li>수신 중 하나의 테이블에서 오류가 발생하면 전체 임시 테이블을 삭제 → 데이터 무결성 보장</li>
+                  <li>타시스템에 송신하는 메타 정보(타시스템 IP·URI, API Key, 경로 등) 등 변경 가능성 있는 값을 웹에서 수정할 수 있도록 구성 → 확장성 고려</li>
+                </ul>`
+            }
+          ],
+          diagram: `
+            <div class="trouble-flow">
+              <div class="trouble-flow__label">데이터 수신 과정</div>
+              <div class="tflow">
+                <div class="tflow__node">① 행정기관 전체 시스템 정보 수신 → 임시 테이블</div>
+                <div class="tflow__conn"></div>
+                <div class="tflow__split">
+                  <div class="tflow__lane">
+                    <div class="tflow__node tflow__node--sub">연계시스템 매핑정보 수신 → 임시 테이블</div>
+                    <div class="tflow__node tflow__node--sub">연계시스템정보 수신 → 임시 테이블</div>
+                  </div>
+                  <div class="tflow__lane">
+                    <div class="tflow__node tflow__node--sub">SW 매핑정보 수신 → 임시 테이블</div>
+                    <div class="tflow__node tflow__node--sub">SW정보 수신 → 임시 테이블</div>
+                  </div>
+                </div>
+                <div class="tflow__conn"></div>
+                <div class="tflow__node">전체 데이터 수신 완료 (임시 테이블 5개)</div>
+                <div class="tflow__conn"></div>
+                <div class="tflow__node">기존 테이블 rename → 백업으로 명칭 변경</div>
+                <div class="tflow__conn"></div>
+                <div class="tflow__node">임시 테이블 → 본테이블 명칭 전환</div>
+                <div class="tflow__conn"></div>
+                <div class="tflow__node tflow__node--pass">✓ 수신 기간 중에도 무중단 서비스</div>
+              </div>
+            </div>`,
+          tags: ['시스템 연계', '임시 테이블 스위칭', '멀티스레드'],
+          problemSummary: '전체 행정시스템 정보 수신에 3일 이상 소요되고, 수신 기간 동안 실테이블을 갱신하는 구조라 해당 기능을 사용할 수 없음',
+          solutionSummary: '임시 테이블 5개에 수신한 뒤 rename으로 본테이블과 교체해 무중단으로 운영하고, 멀티스레드 수신·오류 시 전체 롤백으로 수신 기간 단축과 무결성을 확보'
         }
       ];
 
@@ -3100,6 +3335,7 @@
       const dotsWrap = document.getElementById('troubleDots');
       const prevBtn = document.getElementById('troublePrev');
       const nextBtn = document.getElementById('troubleNext');
+      const pagesWrap = document.getElementById('troublePages');
       if (!track) return;
 
       // 카드 렌더링
@@ -3133,6 +3369,14 @@
       ).join('');
       const dots = dotsWrap.querySelectorAll('.trouble-carousel__dot');
 
+      // 상단 우측 페이지 번호 버튼 렌더링 (항목 수 기반 동적 생성)
+      if (pagesWrap) {
+        pagesWrap.innerHTML = troubleData.map((_, i) =>
+          `<button class="trouble-carousel__page" data-index="${i}" aria-label="${i + 1}번째 사례로 이동">${i + 1}</button>`
+        ).join('');
+      }
+      const pages = pagesWrap ? pagesWrap.querySelectorAll('.trouble-carousel__page') : [];
+
       let current = 0;
       const viewport = track.parentElement;
 
@@ -3145,6 +3389,12 @@
       function update() {
         track.style.transform = `translateX(-${current * 100}%)`;
         dots.forEach((dot, i) => dot.classList.toggle('active', i === current));
+        pages.forEach((page, i) => {
+          const on = i === current;
+          page.classList.toggle('active', on);
+          if (on) page.setAttribute('aria-current', 'true');
+          else page.removeAttribute('aria-current');
+        });
         prevBtn.disabled = current === 0;
         nextBtn.disabled = current === troubleData.length - 1;
         syncHeight();
@@ -3153,6 +3403,7 @@
       prevBtn.addEventListener('click', () => { if (current > 0) { current--; update(); } });
       nextBtn.addEventListener('click', () => { if (current < troubleData.length - 1) { current++; update(); } });
       dots.forEach(dot => dot.addEventListener('click', () => { current = Number(dot.dataset.index); update(); }));
+      pages.forEach(page => page.addEventListener('click', () => { current = Number(page.dataset.index); update(); }));
 
       update();
       // 폰트 로드·화면 크기 변화로 카드 높이가 바뀌면 재계산
