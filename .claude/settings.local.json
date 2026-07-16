@@ -4,7 +4,8 @@
       "WebFetch(domain:www.wanted.co.kr)",
       "Bash(curl -s \"https://api.github.com/users/parksh93\")",
       "Bash(python3 -c ' *)",
-      "Bash(curl -s \"https://api.github.com/users/parksh93/repos?sort=pushed&per_page=10\")"
+      "Bash(curl -s \"https://api.github.com/users/parksh93/repos?sort=pushed&per_page=10\")",
+      "WebFetch(domain:www.saramin.co.kr)"
     ]
   }
 }
