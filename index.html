@@ -1139,8 +1139,7 @@
       flex-wrap: wrap;
       justify-content: flex-end;
       gap: 6px;
-      /* 카드 콘텐츠 우측 끝선에 맞춰 안쪽으로 들여쓰기 = 카드 좌우 padding(40)
-         (카드가 이제 컨테이너 전체 폭을 쓰므로 화살표 폭은 계산에서 제외) */
+      /* 카드 콘텐츠 우측 끝선에 맞춰 안쪽으로 들여쓰기 = 카드 좌우 padding(40) */
       margin-right: 40px;
     }
 
@@ -1202,47 +1201,12 @@
       background: var(--accent-dim);
     }
 
-    /* 카드 뷰포트가 컨테이너 전체 폭을 쓰도록 화살표는 절대배치로 카드 위에 오버레이.
-       → 카드 좌/우 끝선이 제목/컨테이너 끝선과 정확히 일치 */
     .trouble-carousel {
       position: relative;
     }
 
-    .trouble-carousel__arrow {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 2;
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      color: var(--text-secondary);
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-
-    .trouble-carousel > .trouble-carousel__arrow:first-child { left: 8px; }
-    .trouble-carousel > .trouble-carousel__arrow:last-child { right: 8px; }
-
-    .trouble-carousel__arrow:hover {
-      border-color: rgba(194, 164, 255, 0.3);
-      color: var(--accent);
-      background: var(--accent-dim);
-    }
-
-    .trouble-carousel__arrow:disabled {
-      opacity: 0.25;
-      cursor: default;
-      pointer-events: none;
-    }
-
     .trouble-carousel__viewport {
-      /* 컨테이너 전체 폭 사용 (화살표는 절대배치라 폭을 차지하지 않음) */
+      /* 컨테이너 전체 폭 사용 — 페이지 이동은 상단 페이징 버튼으로 제어 */
       overflow: hidden;
       /* 높이는 JS가 현재 카드에 맞춰 갱신 — 카드별 높이 차이에 대응 */
       transition: height 0.5s cubic-bezier(.25,.1,.25,1);
@@ -1896,7 +1860,6 @@
 
       .maint-grid { grid-template-columns: 1fr; }
 
-      .trouble-carousel__arrow { width: 36px; height: 36px; }
       .trouble-card { padding: 24px 20px; }
       .trouble-card__body { grid-template-columns: 1fr; }
       /* 모바일: 카드 콘텐츠 우측 끝선 = 카드 padding(20) */
@@ -2144,7 +2107,6 @@
       .trouble-carousel {
         display: block !important;
       }
-      .trouble-carousel__arrow,
       .trouble-carousel__dots,
       .trouble-carousel__meta,
       #troubleViewAllBtn { display: none !important; }
@@ -2668,17 +2630,11 @@
       </div>
 
       <div class="trouble-carousel fade-up">
-        <button class="trouble-carousel__arrow" id="troublePrev" aria-label="이전 사례">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
         <div class="trouble-carousel__viewport">
           <div class="trouble-carousel__track" id="troubleTrack">
             <!-- Populated by JS (troubleData) -->
           </div>
         </div>
-        <button class="trouble-carousel__arrow" id="troubleNext" aria-label="다음 사례">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
       </div>
       <div class="trouble-carousel__dots fade-up" id="troubleDots"></div>
     </div>
@@ -3333,8 +3289,6 @@
 
       const track = document.getElementById('troubleTrack');
       const dotsWrap = document.getElementById('troubleDots');
-      const prevBtn = document.getElementById('troublePrev');
-      const nextBtn = document.getElementById('troubleNext');
       const pagesWrap = document.getElementById('troublePages');
       if (!track) return;
 
@@ -3380,7 +3334,7 @@
       let current = 0;
       const viewport = track.parentElement;
 
-      // 카드별 높이가 달라 뷰포트를 현재 카드 높이에 맞춤 (좌우 버튼이 항상 카드 세로 중앙에 오도록)
+      // 카드별 높이가 달라 뷰포트를 현재 카드 높이에 맞춤
       function syncHeight() {
         const card = track.children[current];
         if (card) viewport.style.height = card.offsetHeight + 'px';
@@ -3395,13 +3349,9 @@
           if (on) page.setAttribute('aria-current', 'true');
           else page.removeAttribute('aria-current');
         });
-        prevBtn.disabled = current === 0;
-        nextBtn.disabled = current === troubleData.length - 1;
         syncHeight();
       }
 
-      prevBtn.addEventListener('click', () => { if (current > 0) { current--; update(); } });
-      nextBtn.addEventListener('click', () => { if (current < troubleData.length - 1) { current++; update(); } });
       dots.forEach(dot => dot.addEventListener('click', () => { current = Number(dot.dataset.index); update(); }));
       pages.forEach(page => page.addEventListener('click', () => { current = Number(page.dataset.index); update(); }));
 
