@@ -3161,67 +3161,6 @@
         },
         {
           project: '행정정보 데이터세트 종합관리시스템',
-          title: '장기보존패키지 메타데이터 XML의 웹 조회(HTML 변환)',
-          blocks: [
-            {
-              label: '개요',
-              text: '장기보존패키지 내 메타데이터 XML 파일을 다운로드하지 않고 웹에서 바로 확인할 수 있도록 해달라는 고객 요청이 있었습니다.'
-            },
-            {
-              label: '해결 방법',
-              text: `
-                <ol>
-                  <li>메타데이터 XML에 대응하는 XSLT 파일 사전 정의</li>
-                  <li>웹에서 HTML 조회 요청 시 사전 정의된 XSLT로 XML을 HTML로 변환</li>
-                  <li>변환된 HTML을 웹에서 바로 조회</li>
-                </ol>`
-            },
-            {
-              label: '기능 확장',
-              wide: true,
-              text: '사용자가 추가한 XML 파일도 동일한 이름의 XSLT 파일이 존재하면 HTML로 변환해 웹에서 조회할 수 있도록 확장 적용했습니다.'
-            }
-          ],
-          link: 'https://climbing-alley-625.notion.site/XML-HTML-15edde0632c780a79a13e5b0e805b85e?source=copy_link',
-          tags: ['XSLT', 'XML → HTML'],
-          problemSummary: '메타데이터 XML을 다운로드 없이 웹에서 바로 확인하고 싶다는 고객 요청',
-          solutionSummary: '사전 정의한 XSLT로 XML을 HTML로 변환해 웹에서 즉시 조회하도록 구현하고, 사용자 추가 XML까지 확장 적용'
-        },
-        {
-          project: '행정정보 데이터세트 종합관리시스템',
-          title: '업무망·인터넷망 동시 접속(중복 로그인) 제어',
-          blocks: [
-            {
-              label: '개요',
-              text: '동일 사용자가 여러 경로에서 중복 접속하지 못하도록 제한하는 요구사항입니다.'
-            },
-            {
-              label: '문제 상황',
-              text: '사용자의 접속 경로가 업무망과 인터넷망 두 가지로 존재하고, 망분리 환경에서 중계서버를 거치는 구조라 동시 접속 제어에 어려움이 있었습니다.'
-            },
-            {
-              label: '해결 방법',
-              wide: true,
-              text: `
-                <ol>
-                  <li>사용자 최초 로그인 시 접속한 서버의 JSESSIONID를 DB에 저장</li>
-                  <li>다른 PC에서 로그인하면 DB의 JSESSIONID를 새 값으로 업데이트</li>
-                  <li>사용자 이벤트 발생 시 현재 JSESSIONID와 DB 값이 동일한지 비교</li>
-                  <li>동일하면 정상 진행, 다르면 동일 계정 접속 감지 안내 후 강제 로그아웃</li>
-                </ol>`
-            },
-            {
-              label: '개선 필요사항',
-              wide: true,
-              text: '로그아웃 없이 브라우저를 강제 종료한 뒤 다시 로그인하면 중복 접속이 아닌데도 안내 메시지가 노출됩니다. 일정 시간 경과 시 DB에서 JSESSIONID를 제거하는 방법 등으로 사용자 혼란을 줄이는 개선을 계획하고 있습니다.'
-            }
-          ],
-          tags: ['세션 제어', '망분리', 'JSESSIONID'],
-          problemSummary: '망분리(업무망·인터넷망) 환경에서 중계서버를 거치는 구조라 동일 사용자의 동시 접속 제어가 어려움',
-          solutionSummary: 'JSESSIONID를 DB에 저장·비교해 중복 로그인을 감지하고, 안내 후 강제 로그아웃 처리'
-        },
-        {
-          project: '행정정보 데이터세트 종합관리시스템',
           title: '타시스템과의 연계데이터 수신',
           blocks: [
             {
@@ -3289,6 +3228,67 @@
           tags: ['시스템 연계', '임시 테이블 스위칭', '멀티스레드'],
           problemSummary: '전체 행정시스템 정보 수신에 3일 이상 소요되고, 수신 기간 동안 실테이블을 갱신하는 구조라 해당 기능을 사용할 수 없음',
           solutionSummary: '임시 테이블 5개에 수신한 뒤 rename으로 본테이블과 교체해 무중단으로 운영하고, 멀티스레드 수신·오류 시 전체 롤백으로 수신 기간 단축과 무결성을 확보'
+        },
+        {
+          project: '행정정보 데이터세트 종합관리시스템',
+          title: '업무망·인터넷망 동시 접속(중복 로그인) 제어',
+          blocks: [
+            {
+              label: '개요',
+              text: '동일 사용자가 여러 경로에서 중복 접속하지 못하도록 제한하는 요구사항입니다.'
+            },
+            {
+              label: '문제 상황',
+              text: '사용자의 접속 경로가 업무망과 인터넷망 두 가지로 존재하고, 망분리 환경에서 중계서버를 거치는 구조라 동시 접속 제어에 어려움이 있었습니다.'
+            },
+            {
+              label: '해결 방법',
+              wide: true,
+              text: `
+                <ol>
+                  <li>사용자 최초 로그인 시 접속한 서버의 JSESSIONID를 DB에 저장</li>
+                  <li>다른 PC에서 로그인하면 DB의 JSESSIONID를 새 값으로 업데이트</li>
+                  <li>사용자 이벤트 발생 시 현재 JSESSIONID와 DB 값이 동일한지 비교</li>
+                  <li>동일하면 정상 진행, 다르면 동일 계정 접속 감지 안내 후 강제 로그아웃</li>
+                </ol>`
+            },
+            {
+              label: '개선 필요사항',
+              wide: true,
+              text: '로그아웃 없이 브라우저를 강제 종료한 뒤 다시 로그인하면 중복 접속이 아닌데도 안내 메시지가 노출됩니다. 일정 시간 경과 시 DB에서 JSESSIONID를 제거하는 방법 등으로 사용자 혼란을 줄이는 개선을 계획하고 있습니다.'
+            }
+          ],
+          tags: ['세션 제어', '망분리', 'JSESSIONID'],
+          problemSummary: '망분리(업무망·인터넷망) 환경에서 중계서버를 거치는 구조라 동일 사용자의 동시 접속 제어가 어려움',
+          solutionSummary: 'JSESSIONID를 DB에 저장·비교해 중복 로그인을 감지하고, 안내 후 강제 로그아웃 처리'
+        },
+        {
+          project: '행정정보 데이터세트 종합관리시스템',
+          title: '장기보존패키지 메타데이터 XML의 웹 조회(HTML 변환)',
+          blocks: [
+            {
+              label: '개요',
+              text: '장기보존패키지 내 메타데이터 XML 파일을 다운로드하지 않고 웹에서 바로 확인할 수 있도록 해달라는 고객 요청이 있었습니다.'
+            },
+            {
+              label: '해결 방법',
+              text: `
+                <ol>
+                  <li>메타데이터 XML에 대응하는 XSLT 파일 사전 정의</li>
+                  <li>웹에서 HTML 조회 요청 시 사전 정의된 XSLT로 XML을 HTML로 변환</li>
+                  <li>변환된 HTML을 웹에서 바로 조회</li>
+                </ol>`
+            },
+            {
+              label: '기능 확장',
+              wide: true,
+              text: '사용자가 추가한 XML 파일도 동일한 이름의 XSLT 파일이 존재하면 HTML로 변환해 웹에서 조회할 수 있도록 확장 적용했습니다.'
+            }
+          ],
+          link: 'https://climbing-alley-625.notion.site/XML-HTML-15edde0632c780a79a13e5b0e805b85e?source=copy_link',
+          tags: ['XSLT', 'XML → HTML'],
+          problemSummary: '메타데이터 XML을 다운로드 없이 웹에서 바로 확인하고 싶다는 고객 요청',
+          solutionSummary: '사전 정의한 XSLT로 XML을 HTML로 변환해 웹에서 즉시 조회하도록 구현하고, 사용자 추가 XML까지 확장 적용'
         }
       ];
 
