@@ -1882,6 +1882,9 @@
       .project-card__wrap { max-width: 700px; }
     }
 
+    /* 프린트 전용 URL 표기 (화면에서는 숨김) */
+    .print-url { display: none; }
+
     /* ===== Print / PDF Mode ===== */
     @media print {
       /* 기존 색상 그대로 보존 */
@@ -1894,8 +1897,20 @@
         will-change: auto !important;
       }
 
-      /* 페이지 설정 */
-      @page { margin: 10mm; }
+      /* 페이지 설정 — 여백 0 (브라우저 기본 머리글/바닥글 제거됨) */
+      @page { margin: 0; }
+
+      /* 문서 최상단 URL 표기 */
+      .print-url {
+        display: block !important;
+        padding: 6mm 32px 0;
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        color: #c2a4ff !important;
+        text-decoration: underline !important;
+        text-underline-offset: 3px;
+      }
 
       /* 불필요 요소 숨김 */
       .loader,
@@ -2151,6 +2166,9 @@
   </style>
 </head>
 <body>
+
+  <!-- 인쇄 시에만 표시되는 문서 URL -->
+  <a class="print-url" href="https://parksh93.github.io">https://parksh93.github.io</a>
 
   <!-- Loading Screen (로딩바 비활성화 — 입장 모션만 유지)
   <div class="loader" id="loader">
