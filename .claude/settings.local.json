@@ -5,7 +5,12 @@
       "Bash(curl -s \"https://api.github.com/users/parksh93\")",
       "Bash(python3 -c ' *)",
       "Bash(curl -s \"https://api.github.com/users/parksh93/repos?sort=pushed&per_page=10\")",
-      "WebFetch(domain:www.saramin.co.kr)"
+      "WebFetch(domain:www.saramin.co.kr)",
+      "Skill(claude-in-chrome)",
+      "Read(//private/tmp/**)",
+      "WebSearch",
+      "Bash(curl -s -L \"https://www.bellock.co.kr/\" -o bl.html -w \"%{http_code}\\\\n\")",
+      "Bash(python3 -)"
     ]
   }
 }
